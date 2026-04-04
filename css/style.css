@@ -84,7 +84,8 @@ a {
   transition: color var(--transition-fast);
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -276,7 +277,8 @@ body.nav-open .burger .burger__line:nth-child(3) {
   /* OPAQUE background — no see-through */
   background-color: var(--bg-color);
 
-  display: none;            /* hidden by default */
+  display: none;
+  /* hidden by default */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -417,8 +419,13 @@ body.nav-open .mobile-overlay {
 }
 
 @keyframes floatOrb {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-50px, 35px) scale(1.12); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(-50px, 35px) scale(1.12);
+  }
 }
 
 .hero__content {
@@ -457,15 +464,24 @@ body.nav-open .mobile-overlay {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.7); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
 }
 
 .hero__title {
   font-size: var(--fs-display);
   font-weight: 900;
   line-height: 1.08;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   margin-bottom: 26px;
   opacity: 0;
@@ -505,6 +521,7 @@ body.nav-open .mobile-overlay {
     opacity: 0;
     transform: translateY(22px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -534,7 +551,7 @@ body.nav-open .mobile-overlay {
 .btn--primary {
   background: var(--accent-color);
   color: var(--bg-color);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .btn--primary:hover {
@@ -701,10 +718,10 @@ body.nav-open .mobile-overlay {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              background var(--transition-smooth),
-              border-color var(--transition-smooth),
-              box-shadow var(--transition-smooth);
+    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
 }
 
 /* Top gradient accent line */
@@ -980,6 +997,7 @@ body.nav-open .mobile-overlay {
 
 /* ---- REDUCE MOTION ---- */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
