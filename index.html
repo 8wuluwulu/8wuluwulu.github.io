@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Егор — Frontend-разработчик. Создаю современные веб-интерфейсы, объединяя классическую инженерию и мощь AI.">
-  <meta name="theme-color" content="#0a0a0c">
+  <meta name="theme-color" content="#020617">
   <title>Egor. — Frontend Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,21 +15,44 @@
 
   <!-- ========== HEADER ========== -->
   <header class="header" id="header">
-    <div class="logo">Egor<span>.</span></div>
+    <div class="logo">dev/<span>.</span></div>
 
-    <nav class="nav" id="nav" aria-label="Основная навигация">
-      <a class="nav__link" href="#about">Обо мне</a>
-      <a class="nav__link" href="#skills">Навыки</a>
-      <a class="nav__link" href="#projects">Проекты</a>
-      <a class="nav__link" href="#contacts">Контакты</a>
+    <!-- Desktop nav (hidden on mobile) -->
+    <nav class="nav-desktop" id="navDesktop" aria-label="Основная навигация">
+      <a class="nav-desktop__link" href="#about">Обо мне</a>
+      <a class="nav-desktop__link" href="#skills">Навыки</a>
+      <a class="nav-desktop__link" href="#projects">Проекты</a>
+      <a class="nav-desktop__link" href="#contacts">Контакты</a>
     </nav>
 
+    <!-- Mobile burger button -->
     <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
       <span class="burger__line"></span>
       <span class="burger__line"></span>
       <span class="burger__line"></span>
     </button>
   </header>
+
+  <!-- ========== MOBILE OVERLAY NAV ========== -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <!-- Close button in top-right -->
+    <button class="mobile-overlay__close" id="mobileClose" aria-label="Закрыть меню">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="mobile-overlay__nav" aria-label="Мобильная навигация">
+      <ul class="mobile-overlay__list">
+        <li><a class="mobile-overlay__link" href="#about">Обо мне</a></li>
+        <li><a class="mobile-overlay__link" href="#skills">Навыки</a></li>
+        <li><a class="mobile-overlay__link" href="#projects">Проекты</a></li>
+        <li><a class="mobile-overlay__link" href="#contacts">Контакты</a></li>
+      </ul>
+      <p class="mobile-overlay__status">Открыт к сотрудничеству</p>
+    </nav>
+  </div>
 
   <!-- ========== HERO ========== -->
   <section class="hero section" id="about">
@@ -75,31 +98,27 @@
 
     <div class="skills__grid">
       <div class="skill-tag">
-        <span class="skill-tag__icon">⚡</span>
         <span class="skill-tag__text">HTML5 / CSS3</span>
       </div>
       <div class="skill-tag">
-        <span class="skill-tag__icon">⚙️</span>
         <span class="skill-tag__text">JavaScript</span>
       </div>
       <div class="skill-tag">
-        <span class="skill-tag__icon">🐍</span>
         <span class="skill-tag__text">Python</span>
       </div>
       <div class="skill-tag">
-        <span class="skill-tag__icon">🔷</span>
         <span class="skill-tag__text">C#</span>
       </div>
       <div class="skill-tag">
-        <span class="skill-tag__icon">🔀</span>
+        <span class="skill-tag__text">Java</span>
+      </div>
+      <div class="skill-tag">
         <span class="skill-tag__text">Git</span>
       </div>
       <div class="skill-tag">
-        <span class="skill-tag__icon">🤖</span>
         <span class="skill-tag__text">AI-Assisted Development</span>
       </div>
       <div class="skill-tag">
-        <span class="skill-tag__icon">🐧</span>
         <span class="skill-tag__text">Linux</span>
       </div>
     </div>
@@ -220,7 +239,7 @@
         </a>
       </div>
 
-      <p class="footer__copy">&copy; 2026 Egor<span>.</span> Все права защищены.</p>
+      <p class="footer__copy">&copy; 2026 8wuluwulu<span>.</span></p>
     </div>
   </footer>
 

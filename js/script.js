@@ -1,5 +1,5 @@
 /* ============================================
-   EGOR PORTFOLIO — Main Script
+   PORTFOLIO — Main Script
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ============================================
-   STICKY HEADER — shrink on scroll
+   STICKY HEADER — add class on scroll
    ============================================ */
 function initHeader() {
   const header = document.getElementById('header');
@@ -34,42 +34,99 @@ function initHeader() {
 }
 
 /* ============================================
-   MOBILE NAVIGATION
+   MOBILE NAVIGATION — Full-screen overlay
+   Uses separate .mobile-overlay element.
+   Toggles .nav-open on <body>.
    ============================================ */
 function initMobileNav() {
   const burger = document.getElementById('burger');
-  const nav = document.getElementById('nav');
+  const overlay = document.getElementById('mobileOverlay');
+  const closeBtn = document.getElementById('mobileClose');
 
-  if (!burger || !nav) return;
+  if (!burger || !overlay) return;
 
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('active');
-    nav.classList.toggle('open');
-    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+  function openMenu() {
+    document.body.classList.add('nav-open');
+    burger.setAttribute('aria-expanded', 'true');
+    // Set active link in overlay based on current scroll position
+    syncActiveOverlayLink();
+  }
+
+  function closeMenu() {
+    document.body.classList.remove('nav-open');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleMenu() {
+    if (document.body.classList.contains('nav-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  // Burger click toggles overlay
+  burger.addEventListener('click', toggleMenu);
+
+  // Close button (X) in the overlay
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeMenu);
+  }
+
+  // Close when a nav link inside overlay is clicked
+  overlay.querySelectorAll('.mobile-overlay__link').forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 
-  // Close on link click
-  nav.querySelectorAll('.nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      burger.classList.remove('active');
-      nav.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-
-  // Close on escape
+  // Close on Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('open')) {
-      burger.classList.remove('active');
-      nav.classList.remove('open');
-      document.body.style.overflow = '';
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+      closeMenu();
+    }
+  });
+
+  // Close if clicking the overlay background itself (not links/buttons)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      closeMenu();
+    }
+  });
+}
+
+/* ============================================
+   Sync active link in mobile overlay
+   based on which section is currently visible
+   ============================================ */
+function syncActiveOverlayLink() {
+  const sections = document.querySelectorAll('section[id]');
+  const overlayLinks = document.querySelectorAll('.mobile-overlay__link');
+
+  if (!sections.length || !overlayLinks.length) return;
+
+  let currentId = '';
+  const scrollY = window.scrollY + 100;
+
+  sections.forEach(section => {
+    const top = section.offsetTop;
+    const bottom = top + section.offsetHeight;
+    if (scrollY >= top && scrollY < bottom) {
+      currentId = section.getAttribute('id');
+    }
+  });
+
+  overlayLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === `#${currentId}`) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
     }
   });
 }
 
 /* ============================================
    SCROLL REVEAL — IntersectionObserver
-   Sequential fade-in for project cards
+   Sequential fade for cards, tags, headers
    ============================================ */
 function initScrollReveal() {
   const cards = document.querySelectorAll('.project-card');
@@ -85,7 +142,6 @@ function initScrollReveal() {
         if (entry.isIntersecting) {
           const card = entry.target;
           const index = parseInt(card.dataset.index, 10) || 0;
-          // Stagger delay: each card appears 120ms after the previous
           setTimeout(() => {
             card.classList.add('revealed');
           }, index * 120);
@@ -94,8 +150,8 @@ function initScrollReveal() {
       });
     },
     {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px',
     }
   );
 
@@ -120,15 +176,15 @@ function initScrollReveal() {
       });
     },
     {
-      threshold: 0.2,
+      threshold: 0.15,
     }
   );
 
   skillTags.forEach((tag, i) => {
     tag.dataset.index = i;
     tag.style.opacity = '0';
-    tag.style.transform = 'translateY(16px)';
-    tag.style.transition = `opacity 0.5s ease, transform 0.5s ease`;
+    tag.style.transform = 'translateY(14px)';
+    tag.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     tagObserver.observe(tag);
   });
 
@@ -144,13 +200,13 @@ function initScrollReveal() {
       });
     },
     {
-      threshold: 0.3,
+      threshold: 0.25,
     }
   );
 
   sectionHeaders.forEach(header => {
     header.style.opacity = '0';
-    header.style.transform = 'translateY(24px)';
+    header.style.transform = 'translateY(20px)';
     header.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     headerObserver.observe(header);
   });
@@ -169,7 +225,7 @@ function initSmoothScroll() {
       const target = document.querySelector(targetId);
       if (!target) return;
 
-      const headerOffset = 80;
+      const headerOffset = 76;
       const elementPosition = target.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - headerOffset;
 
@@ -182,20 +238,29 @@ function initSmoothScroll() {
 }
 
 /* ============================================
-   ACTIVE NAV HIGHLIGHT — based on scroll pos
+   ACTIVE NAV HIGHLIGHT — scroll position
+   Updates both desktop and mobile nav links
    ============================================ */
 function initActiveNavHighlight() {
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav__link');
+  const desktopLinks = document.querySelectorAll('.nav-desktop__link');
+  const overlayLinks = document.querySelectorAll('.mobile-overlay__link');
 
-  if (!sections.length || !navLinks.length) return;
+  if (!sections.length) return;
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
+
+          // Update desktop nav
+          desktopLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+
+          // Update mobile overlay nav
+          overlayLinks.forEach(link => {
             link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
           });
         }
@@ -203,7 +268,7 @@ function initActiveNavHighlight() {
     },
     {
       threshold: 0.3,
-      rootMargin: '-80px 0px -50% 0px',
+      rootMargin: '-76px 0px -50% 0px',
     }
   );
 
