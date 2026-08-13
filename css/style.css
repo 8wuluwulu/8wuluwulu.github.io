@@ -114,12 +114,6 @@ button {
   background-image:
     radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.14) 1px, transparent 1.5px);
   background-size: 44px 44px;
-  animation: dotsDrift 60s linear infinite;
-}
-
-@keyframes dotsDrift {
-  0%   { transform: translate(0, 0); }
-  100% { transform: translate(44px, 44px); }
 }
 
 .bg-gradient-orb {
@@ -137,7 +131,6 @@ button {
   top: -320px;
   right: -260px;
   background: radial-gradient(circle, rgba(140, 170, 255, 0.75) 0%, rgba(140, 170, 255, 0.22) 40%, transparent 72%);
-  animation: orbFloat1 16s var(--ease-premium) infinite;
 }
 
 .orb-2 {
@@ -146,7 +139,6 @@ button {
   bottom: -280px;
   left: -300px;
   background: radial-gradient(circle, rgba(120, 140, 255, 0.7) 0%, rgba(120, 140, 255, 0.2) 45%, transparent 72%);
-  animation: orbFloat2 22s var(--ease-premium) infinite;
 }
 
 .orb-3 {
@@ -155,7 +147,6 @@ button {
   top: 25%;
   left: 25%;
   background: radial-gradient(circle, rgba(100, 130, 240, 0.55) 0%, rgba(100, 130, 240, 0.14) 50%, transparent 72%);
-  animation: orbFloat3 20s var(--ease-premium) infinite;
 }
 
 .orb-4 {
@@ -164,25 +155,12 @@ button {
   top: 55%;
   right: -80px;
   background: radial-gradient(circle, rgba(160, 190, 255, 0.55) 0%, rgba(160, 190, 255, 0.14) 50%, transparent 72%);
-  animation: orbFloat4 19s var(--ease-premium) infinite;
 }
 
-@keyframes orbFloat1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(-160px, 180px) scale(1.2); }
-}
-@keyframes orbFloat2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(180px, -160px) scale(1.15); }
-}
-@keyframes orbFloat3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(-120px, -130px) scale(1.2); }
-}
-@keyframes orbFloat4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(120px, 140px) scale(1.18); }
-}
+@keyframes orbFloat1 { }
+@keyframes orbFloat2 { }
+@keyframes orbFloat3 { }
+@keyframes orbFloat4 { }
 
 /* ---------- Container ---------- */
 .container {
