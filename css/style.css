@@ -95,6 +95,29 @@ button {
 }
 
 /* ---------- Background Effects ---------- */
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-1 {
+  width: 720px;
+  height: 720px;
+  top: -260px;
+  right: -200px;
+  background: radial-gradient(circle, rgba(110, 140, 255, 0.22) 0%, rgba(110, 140, 255, 0.06) 45%, transparent 75%);
+}
+
+.glow-2 {
+  width: 640px;
+  height: 640px;
+  bottom: -240px;
+  left: -180px;
+  background: radial-gradient(circle, rgba(120, 150, 255, 0.18) 0%, rgba(120, 150, 255, 0.05) 45%, transparent 75%);
+}
 
 /* ---------- Container ---------- */
 .container {
