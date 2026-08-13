@@ -100,57 +100,87 @@ button {
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.028;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
   background-size: 120px 120px;
+}
+
+.bg-dots {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 1.5px);
+  background-size: 44px 44px;
+  animation: dotsDrift 60s linear infinite;
+}
+
+@keyframes dotsDrift {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(44px, 44px); }
 }
 
 .bg-gradient-orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(100px);
   pointer-events: none;
   z-index: 0;
 }
 
 .orb-1 {
-  width: 720px;
-  height: 720px;
-  top: -200px;
-  right: -150px;
-  background: radial-gradient(circle, rgba(123, 147, 255, 0.32) 0%, transparent 70%);
-  animation: orbFloat1 18s var(--ease-premium) infinite;
+  width: 900px;
+  height: 900px;
+  top: -280px;
+  right: -200px;
+  background: radial-gradient(circle, rgba(123, 147, 255, 0.55) 0%, rgba(123, 147, 255, 0.15) 40%, transparent 72%);
+  animation: orbFloat1 16s var(--ease-premium) infinite;
 }
 
 .orb-2 {
-  width: 620px;
-  height: 620px;
-  bottom: -150px;
-  left: -200px;
-  background: radial-gradient(circle, rgba(123, 147, 255, 0.24) 0%, transparent 70%);
-  animation: orbFloat2 24s var(--ease-premium) infinite;
+  width: 800px;
+  height: 800px;
+  bottom: -240px;
+  left: -260px;
+  background: radial-gradient(circle, rgba(90, 110, 240, 0.5) 0%, rgba(90, 110, 240, 0.12) 45%, transparent 72%);
+  animation: orbFloat2 22s var(--ease-premium) infinite;
 }
 
 .orb-3 {
-  width: 500px;
-  height: 500px;
-  top: 45%;
-  left: 40%;
-  background: radial-gradient(circle, rgba(80, 120, 220, 0.2) 0%, transparent 70%);
-  animation: orbFloat3 26s var(--ease-premium) infinite;
+  width: 620px;
+  height: 620px;
+  top: 35%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(80, 120, 220, 0.32) 0%, rgba(80, 120, 220, 0.08) 50%, transparent 72%);
+  animation: orbFloat3 20s var(--ease-premium) infinite;
+}
+
+.orb-4 {
+  width: 480px;
+  height: 480px;
+  top: 55%;
+  right: 5%;
+  background: radial-gradient(circle, rgba(140, 170, 255, 0.35) 0%, rgba(140, 170, 255, 0.1) 50%, transparent 72%);
+  animation: orbFloat4 19s var(--ease-premium) infinite;
 }
 
 @keyframes orbFloat1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(-120px, 140px) scale(1.15); }
+  50%      { transform: translate(-160px, 180px) scale(1.2); }
 }
 @keyframes orbFloat2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(140px, -120px) scale(1.1); }
+  50%      { transform: translate(180px, -160px) scale(1.15); }
 }
 @keyframes orbFloat3 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(-90px, -100px) scale(1.12); }
+  50%      { transform: translate(-120px, -130px) scale(1.2); }
+}
+@keyframes orbFloat4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(120px, 140px) scale(1.18); }
 }
 
 /* ---------- Container ---------- */
@@ -408,8 +438,8 @@ button {
 }
 
 .hero-avatar {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid var(--border-soft);
@@ -824,8 +854,8 @@ button {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
 }
 
 .project-card {
@@ -834,7 +864,13 @@ button {
   border: 1px solid var(--border-hair);
   background: rgba(24, 24, 36, 0.3);
   transition: border-color 0.5s var(--ease-smooth), transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-smooth);
+  min-height: 240px;
 }
+
+.project-card--wide { grid-column: span 8; grid-row: span 2; }
+.project-card--tall { grid-column: span 4; grid-row: span 2; }
+.project-card--narrow { grid-column: span 4; }
+.project-card--wide + .project-card { grid-column: auto; }
 
 .project-card:hover {
   border-color: var(--border-soft);
