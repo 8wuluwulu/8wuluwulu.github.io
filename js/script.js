@@ -191,10 +191,11 @@
       }
 
       container.classList.add("sorted");
-      // clear inline styles so CSS .sorted rule paints bars green
+      // clear inline styles so CSS .sorted rule paints heights + green wave
       for (var l = 0; l < bars.length; l++) {
         bars[l].style.background = "";
         bars[l].style.boxShadow = "";
+        bars[l].style.height = "";
       }
 
       await sleep(3000);
@@ -202,7 +203,40 @@
     }
   }
 
-  // ---- Skill tag ripple on hover (accent wave sweep) ----
+  // ---- Contact terminal — typewriter effect on the "via" field ----
+(function () {
+  var typingEl = document.getElementById("contactTyping");
+  if (!typingEl) return;
+
+  var text = "Telegram";
+  var idx = 0;
+
+  function typeStep() {
+    if (idx <= text.length) {
+      typingEl.textContent = text.slice(0, idx);
+      idx++;
+      setTimeout(typeStep, 70 + Math.random() * 40);
+    }
+  }
+
+  var contactSection = document.getElementById("contact");
+  if (!contactSection) return;
+
+  var observer = new IntersectionObserver(function (entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) {
+        idx = 0;
+        typeStep();
+        observer.unobserve(contactSection);
+        break;
+      }
+    }
+  }, { threshold: 0.2 });
+
+  observer.observe(contactSection);
+})();
+
+// ---- Skill tag ripple on hover (accent wave sweep) ----
   // No JS needed — handled via CSS .skill-tags span::before animation.
 
   // ---- Subtle orb parallax (GPU-only, passive) ----
