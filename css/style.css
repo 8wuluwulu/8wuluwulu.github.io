@@ -2253,12 +2253,60 @@ button {
   .project-anima--sparkline { height: 44px; margin-top: 10px; }
   .algo-visual { height: 64px; gap: 4px; }
 
-  /* Skills card tightening */
-  .skill-card { padding: 20px 18px; gap: 14px; }
-  .skill-title { font-size: 17px; }
-  .skill-tags { gap: 6px 8px; }
-  .skill-tags span { padding: 6px 11px; font-size: 11px; }
-  .skills-divider { padding: 2px 0; }
+  /* Skills section — phone */
+  .skills-grid {
+    gap: 14px;
+    grid-template-columns: 1fr;
+  }
+  .skill-card {
+    padding: 18px 16px;
+    gap: 12px;
+    min-width: 0;
+  }
+  .skill-card-head { gap: 10px; align-items: center; }
+  .skill-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .skill-title {
+    font-size: 15.5px;
+    line-height: 1.25;
+  }
+  .skill-tags {
+    gap: 5px 6px;
+    flex-wrap: wrap;
+  }
+  .skill-tags span {
+    padding: 4px 9px;
+    font-size: 10.5px;
+    line-height: 1.3;
+    flex: 0 1 auto;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Divider: on tiny phones drop the side lines and use a centred pill label */
+  .skills-divider {
+    padding: 0;
+    gap: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 2px 0;
+  }
+  .skills-divider .divider-line {
+    display: none;
+  }
+  .skills-divider .divider-label {
+    font-size: 10px;
+    padding: 4px 12px;
+    letter-spacing: 0.06em;
+  }
 
   /* Education card */
   .edu-card { padding: 22px 18px; gap: 18px; }
