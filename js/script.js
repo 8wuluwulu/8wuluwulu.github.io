@@ -191,10 +191,11 @@
       }
 
       container.classList.add("sorted");
-      // ensure last bar is also glowing
-      var lastBar = bars[bars.length - 1];
-      lastBar.style.background = "linear-gradient(180deg, #a8b8ff, var(--accent))";
-      lastBar.style.boxShadow = "0 0 10px var(--accent-glow-strong)";
+      // clear inline styles so CSS .sorted rule paints bars green
+      for (var l = 0; l < bars.length; l++) {
+        bars[l].style.background = "";
+        bars[l].style.boxShadow = "";
+      }
 
       await sleep(3000);
       startSortLoop(container);

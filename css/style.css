@@ -824,6 +824,7 @@ button {
 .project-card--wide { grid-column: span 8; grid-row: span 2; }
 .project-card--tall { grid-column: span 4; grid-row: span 2; }
 .project-card--narrow { grid-column: span 4; }
+.project-card--compact { grid-row: span 1; }
 
 .project-card:hover {
   border-color: var(--border-soft);
@@ -1203,12 +1204,12 @@ button {
 .spark-path {
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  animation: sparkDraw 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: sparkDraw 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 .spark-glow {
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  animation: sparkDraw 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: sparkDraw 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 @keyframes sparkDraw {
   0%   { stroke-dashoffset: 200; opacity: 0; }
@@ -1240,7 +1241,7 @@ button {
   box-shadow: 0 0 6px var(--accent-glow);
   transition: height 0.7s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s, box-shadow 0.4s;
 }
-/* Sorted state — bars settle in ascending order */
+/* Sorted state — bars settle in ascending order, green glow pulses */
 .algo-visual.sorted .algo-bar:nth-child(1) { height: 32%; }
 .algo-visual.sorted .algo-bar:nth-child(2) { height: 38%; }
 .algo-visual.sorted .algo-bar:nth-child(3) { height: 44%; }
@@ -1252,8 +1253,13 @@ button {
 .algo-visual.sorted .algo-bar:nth-child(9) { height: 80%; }
 .algo-visual.sorted .algo-bar:nth-child(10) { height: 86%; }
 .algo-visual.sorted .algo-bar {
-  background: linear-gradient(180deg, #a8b8ff, var(--accent));
-  box-shadow: 0 0 10px var(--accent-glow-strong);
+  background: linear-gradient(180deg, #86efac, #22c55e);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+}
+.algo-visual.sorted {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.08);
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.18) inset;
 }
 /* Shuffling back at end of cycle */
 .algo-visual.shuffle .algo-bar {
