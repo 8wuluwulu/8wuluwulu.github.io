@@ -1223,14 +1223,13 @@ button {
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  gap: 5px;
+  gap: 6px;
   height: 90px;
   width: 100%;
   margin-bottom: 8px;
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  background: rgba(123, 147, 255, 0.04);
-  border: 1px solid rgba(123, 147, 255, 0.08);
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 .algo-bar {
   flex: 1;
@@ -1254,12 +1253,7 @@ button {
 .algo-visual.sorted .algo-bar:nth-child(10) { height: 86%; }
 .algo-visual.sorted .algo-bar {
   background: linear-gradient(180deg, #86efac, #22c55e);
-  box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
-}
-.algo-visual.sorted {
-  border-color: rgba(34, 197, 94, 0.35);
-  background: rgba(34, 197, 94, 0.08);
-  box-shadow: 0 0 24px rgba(34, 197, 94, 0.18) inset;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.8), 0 0 28px rgba(34, 197, 94, 0.4);
 }
 /* Shuffling back at end of cycle */
 .algo-visual.shuffle .algo-bar {
