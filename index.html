@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Егор Суханов · Web & Full-Stack Developer</title>
-<meta name="description" content="Портфолио Егора Суханова · Web & Full-Stack Developer. CRM-системы, веб-приложения и MVP.">
+<title>Егор Суханов · Web & Backend Developer</title>
+<meta name="description" content="Портфолио Егора Суханова · Web & Backend Developer. CRM-системы, веб-приложения и MVP.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -63,17 +63,17 @@
         </div>
         <span class="hero-eyebrow">
           <span class="eyebrow-dot"></span>
-          Web &amp; Full-Stack Developer
+          Web &amp; Backend Developer
         </span>
 
         <h1 class="hero-headline">
           <span class="hero-line hero-line-1">Егор Суханов</span>
-          <span class="hero-line hero-line-2">Web &amp; Full-Stack</span>
+          <span class="hero-line hero-line-2">Web &amp; Backend</span>
           <span class="hero-line hero-line-3">Developer</span>
         </h1>
 
         <p class="hero-sub">
-          Проектирую и разрабатываю веб-приложения, CRM-системы и MVP. Учусь и хочу получать полезные навыки.
+          Проектирую и разрабатываю веб-приложения, CRM-системы и MVP. Учусь и хочу узнавать новое.
         </p>
 
         <div class="hero-ctas">
@@ -127,8 +127,21 @@
       </h2>
     </div>
 
+    <div class="code-chip projects-chip reveal">
+      <div class="code-chip-bar">
+        <span class="code-chip-dot c-red"></span>
+        <span class="code-chip-dot c-yellow"></span>
+        <span class="code-chip-dot c-green"></span>
+        <span class="code-chip-name">projects.py</span>
+      </div>
+<pre class="code-chip-body"><span class="c-keyword">async def</span> <span class="c-var">get_projects</span>(<span class="c-keyword">db</span>) -> <span class="c-var">list</span>:
+    <span class="c-keyword">return</span> <span class="c-var">await db</span>.<span class="c-key">select</span>(<span class="c-var">Project</span>) \
+        .<span class="c-key">where</span>(<span class="c-str">"status"</span>, <span class="c-bool">"shipped"</span>) \
+        .<span class="c-key">order_by</span>(<span class="c-str">"impact"</span>)  <span class="c-comment"># 3 hits</span></pre>
+    </div>
+
     <div class="projects-grid">
-      <article class="project-card project-card--wide project-card--compact reveal" data-project="hack">
+      <article class="project-card project-card--left project-card--row1 reveal" data-project="hack">
         <div class="project-card-inner">
           <div class="project-header">
             <div class="project-meta">
@@ -136,33 +149,31 @@
               <span class="trophy-badge">Победитель</span>
             </div>
           </div>
-          <h3 class="project-title">Гид первокурсника</h3>
-          <p class="project-subtitle">Победитель ИТ-хакатона КГУ</p>
+          <h3 class="project-title project-title--small">Гид первокурсника</h3>
           <p class="project-desc">
-            Веб-платформа для онбординга студентов. Выиграли 100 000 рублей.
+            Победитель ИТ-хакатона КГУ. Веб-платформа для онбординга студентов · приз 100 000 рублей.
           </p>
           <div class="project-role">
             <span class="role-label">Моя роль:</span>
-            <span class="role-text">Frontend-интерфейс и чат-бот на GigaChat API.</span>
+            <span class="role-text">Backend и чат-бот на GigaChat API.</span>
           </div>
         </div>
       </article>
 
-      <article class="project-card project-card--accent project-card--tall reveal"> 
+      <article class="project-card project-card--accent project-card--right project-card--row1 reveal">
         <div class="project-card-inner">
           <div class="project-header">
             <div class="project-meta">
-              <span class="project-tag">CRM · SaaS</span>
+              <span class="project-tag">CRM</span>
               <span class="project-year">2024-2025</span>
             </div>
             <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="project-link-btn">
               GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
             </a>
           </div>
-          <h3 class="project-title">AcademicLink</h3>
-          <p class="project-subtitle">CRM-система для репетиторов</p>
+          <h3 class="project-title project-title--small">AcademicLink</h3>
           <p class="project-desc">
-            Коммерческий продукт для автоматизации работы репетиторов. Построил архитектуру бэкенда, удобную для интеграции с фронтендом и ботами.
+            CRM для репетиторов. Архитектура бэкенда, удобная для интеграции с фронтендом и ботами.
           </p>
           <div class="project-stack">
             <span>Python</span><span>FastAPI</span><span>Aiogram 3.x</span><span>SQLModel</span><span>PostgreSQL</span>
@@ -170,29 +181,10 @@
         </div>
       </article>
 
-      <article class="project-card project-card--narrow reveal">
+      <article class="project-card project-card--wide project-card--row2 reveal">
         <div class="project-card-inner">
           <div class="project-header">
-            <span class="project-tag">Landing · Dashboard</span>
-          </div>
-          <h3 class="project-title">Dashboard &amp; Web-сервисы</h3>
-          <p class="project-desc">Серия адаптивных и оптимизированных страниц с высоким Performance и быстрым откликом.</p>
-          <div class="project-anima project-anima--sparkline">
-            <svg viewBox="0 0 80 24" preserveAspectRatio="none">
-              <polyline class="spark-path" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="0,18 12,12 24,16 36,6 48,10 60,2 72,8 80,4"/>
-              <polyline class="spark-glow" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" points="0,18 12,12 24,16 36,6 48,10 60,2 72,8 80,4"/>
-            </svg>
-          </div>
-          <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="project-link-btn">
-            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="project-card project-card--wide reveal">
-        <div class="project-card-inner">
-          <div class="project-header">
-            <span class="project-tag">Web · Demo</span>
+            <span class="project-tag">Web</span>
           </div>
           <div class="algo-visual">
             <div class="algo-bar" style="--h:45%"></div>
@@ -206,15 +198,33 @@
             <div class="algo-bar" style="--h:28%"></div>
             <div class="algo-bar" style="--h:78%"></div>
           </div>
-          <h3 class="project-title">Визуализатор алгоритмов</h3>
+          <h3 class="project-title project-title--small">Визуализатор алгоритмов</h3>
           <p class="project-desc">Интерактивная демонстрация работы алгоритмов с подключенным бэкендом.</p>
           <a href="https://algoviz-mvp.onrender.com/" target="_blank" rel="noopener" class="project-link-btn">
-            Демо <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
           </a>
         </div>
       </article>
 
-      
+      <article class="project-card project-card--narrow project-card--row2 reveal">
+        <div class="project-card-inner">
+          <div class="project-header">
+            <span class="project-tag">Landing · Dashboard</span>
+          </div>
+          <h3 class="project-title project-title--small">Dashboard</h3>
+          <p class="project-desc">Серия адаптивных и оптимизированнных страниц.</p>
+          <div class="project-anima project-anima--sparkline">
+            <svg viewBox="0 0 80 24" preserveAspectRatio="none">
+              <polyline class="spark-path" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="0,18 12,12 24,16 36,6 48,10 60,2 72,8 80,4"/>
+              <polyline class="spark-glow" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" points="0,18 12,12 24,16 36,6 48,10 60,2 72,8 80,4"/>
+            </svg>
+          </div>
+          <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="project-link-btn">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          </a>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -225,6 +235,18 @@
       <h2 class="section-title">
         Технический <em>стек</em>
       </h2>
+    </div>
+
+    <div class="code-chip skills-chip reveal">
+      <div class="code-chip-bar">
+        <span class="code-chip-dot c-red"></span>
+        <span class="code-chip-dot c-yellow"></span>
+        <span class="code-chip-dot c-green"></span>
+        <span class="code-chip-name">stack.sh</span>
+      </div>
+<pre class="code-chip-body"><span class="c-keyword">$</span> <span class="c-var">cat</span> <span class="c-str">STACK</span> | <span class="c-keyword">for</span> <span class="c-var">lang</span> <span class="c-keyword">in</span> <span class="c-str">python js sql</span>; <span class="c-keyword">do</span>
+  <span class="c-keyword">echo</span> <span class="c-str">"▸ $lang — production-ready"</span>
+<span class="c-keyword">done</span>  <span class="c-comment"># → 7 tools active</span></pre>
     </div>
 
     <div class="skills-grid">
@@ -315,6 +337,22 @@
         </div>
       </div>
     </div>
+
+    <div class="code-chip education-chip reveal">
+      <div class="code-chip-bar">
+        <span class="code-chip-dot c-red"></span>
+        <span class="code-chip-dot c-yellow"></span>
+        <span class="code-chip-dot c-green"></span>
+        <span class="code-chip-name">student.yaml</span>
+      </div>
+<pre class="code-chip-body"><span class="c-var">student</span>:
+  <span class="c-key">university</span>: <span class="c-str">"КГУ"</span>
+  <span class="c-key">course</span>: <span class="c-bool">3</span>
+  <span class="c-key">focus</span>:
+    - <span class="c-str">"Python"</span>
+    - <span class="c-str">"Bases"</span>
+    - <span class="c-str">"TeamDev"</span>  <span class="c-comment"># КГУ 2026</span></pre>
+    </div>
   </div>
 </section>
 
@@ -327,24 +365,68 @@
           Готов к <em>любым</em><br>предложениям.
         </h2>
         <p class="contact-sub">
-          Пишите в Telegram.
+          Пишите в Telegram — отвечаю быстро.
         </p>
         <a href="https://t.me/nudnuyyyyyy" target="_blank" rel="noopener" class="btn btn-primary btn-large">
           Написать в Telegram
+          <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
         </a>
       </div>
+
       <div class="contact-right">
-        <div class="contact-item">
-          <span class="contact-label">Telegram</span>
-          <a href="https://t.me/nudnuyyyyyy" target="_blank" rel="noopener" class="contact-value">@nudnuyyyyyy</a>
+        <div class="contact-window reveal">
+          <div class="contact-window-bar">
+            <span class="cw-dot c-red"></span>
+            <span class="cw-dot c-yellow"></span>
+            <span class="cw-dot c-green"></span>
+            <span class="cw-filename">contacts.sh</span>
+            <span class="cw-status"><span class="cw-status-dot"></span>online</span>
+          </div>
+          <pre class="contact-window-code">
+<span class="c-keyword">$</span> <span class="c-var">curl</span> <span class="c-str">-X POST</span> <span class="c-var">egor.sukhanov/api</span> \
+    <span class="c-var">--data</span> <span class="c-str">"{&quot;hello&quot;: &quot;lets_talk&quot;}"</span> \
+    <span class="c-var">--via</span> <span class="c-str">"<span id="contactTyping"></span>"</span>
+
+<span class="c-keyword">→</span> <span class="c-bool">200 OK</span>  <span class="c-comment">// ответ ~5 мин</span></pre>
         </div>
-        <div class="contact-item">
-          <span class="contact-label">GitHub</span>
-          <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="contact-value">8wuluwulu</a>
-        </div>
-        <div class="contact-item">
-          <span class="contact-label">Телефон</span>
-          <a href="tel:+79109215428" class="contact-value">+7-910-921-54-28</a>
+
+        <div class="contact-links">
+          <a href="https://t.me/nudnuyyyyyy" target="_blank" rel="noopener" class="contact-card reveal">
+            <span class="contact-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4L12 13.5M22 4l-7 20-4.5-9.5L2 4l20 0z"/></svg>
+            </span>
+            <div class="contact-card-body">
+              <span class="contact-card-label">Telegram</span>
+              <span class="contact-card-value">@nudnuyyyyyy</span>
+            </div>
+            <span class="contact-card-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </span>
+          </a>
+          <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="contact-card reveal">
+            <span class="contact-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.5 0-6-2-6-5 0-2 1.3-3.6 2.8-4.4-.3-.9-.5-1.7-.5-2.6 0-.6.1-1.1.3-1.6 3.4-.6 7.2.5 9.4 3.3 2.2-2.8 6-3.9 9.4-3.3.2.5.3 1 .3 1.6 0 .9-.2 1.7-.5 2.6 1.5.8 2.8 2.4 2.8 4.4 0 3-1.5 5-6 5"/></svg>
+            </span>
+            <div class="contact-card-body">
+              <span class="contact-card-label">GitHub</span>
+              <span class="contact-card-value">github.com/8wuluwulu</span>
+            </div>
+            <span class="contact-card-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </span>
+          </a>
+          <a href="tel:+79109215428" class="contact-card reveal">
+            <span class="contact-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.1-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.5 2.7a2 2 0 01-.5 2l-1 1a16 16 0 006 6l1-1a2 2 0 012-.5c.9.2 1.8.4 2.7.5a2 2 0 011.7 2z"/></svg>
+            </span>
+            <div class="contact-card-body">
+              <span class="contact-card-label">Телефон</span>
+              <span class="contact-card-value">+7-910-921-54-28</span>
+            </div>
+            <span class="contact-card-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </span>
+          </a>
         </div>
       </div>
     </div>
