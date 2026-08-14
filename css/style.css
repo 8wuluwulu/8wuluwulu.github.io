@@ -2095,12 +2095,21 @@ button {
     font-size: clamp(32px, 10vw, 48px);
   }
 
+  .hero-inner {
+    padding: 0 20px;
+  }
+
+  .hero-avatar {
+    width: 120px;
+    height: 120px;
+  }
+
   .section {
-    padding: 80px 0;
+    padding: 70px 0;
   }
 
   .section-head {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
 
   .about-grid {
@@ -2110,6 +2119,33 @@ button {
   .about-card--wide {
     grid-column: span 1;
   }
+
+  /* Projects grid → single column on phones */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 16px;
+  }
+  .project-card--left,
+  .project-card--right,
+  .project-card--wide,
+  .project-card--narrow,
+  .project-card--row1,
+  .project-card--row2 {
+    grid-column: span 1;
+    grid-row: auto;
+  }
+  .project-card-inner {
+    padding: 22px 20px;
+  }
+  .project-title { font-size: 26px; }
+  .project-title--small { font-size: 22px; }
+  .project-desc { font-size: 13px; }
+  .project-tag { font-size: 10px; padding: 4px 9px; }
+  .project-link-btn { font-size: 10.5px; padding: 4px 10px; }
+  .project-stack { gap: 5px; padding-top: 10px; }
+  .project-stack span { font-size: 10.5px; padding: 3px 9px; }
+  .trophy-badge { top: 20px; right: 20px; font-size: 10.5px; padding: 5px 10px; }
 
   .contact-item {
     grid-template-columns: 1fr;
@@ -2127,19 +2163,148 @@ button {
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  .hero-inner {
+    padding: 0 16px;
+  }
+
   .hero-headline {
     font-size: clamp(28px, 9vw, 38px);
+  }
+
+  .hero-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+  .hero-sub {
+    font-size: 13.5px;
+    max-width: 100%;
+  }
+
+  .hero-badges {
+    gap: 6px 8px;
+    margin-top: 12px;
+  }
+  .badge {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  /* Buttons — full-width stacked, centred text */
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .btn {
+    justify-content: center;
+    width: 100%;
+    padding: 12px 20px;
   }
 
   .section-title {
     font-size: clamp(26px, 7vw, 36px);
   }
 
-  .project-title {
-    font-size: 24px;
+  .about-card {
+    padding: 24px 22px;
+    min-height: 0;
   }
 
-  .bento-grid {
-    grid-template-columns: 1fr;
+  /* Tighten project card internals on phone */
+  .project-card-inner {
+    padding: 20px 18px;
+    gap: 8px;
   }
+  .project-title { font-size: 22px; }
+  .project-title--small { font-size: 20px; }
+  .project-desc { font-size: 12.5px; line-height: 1.55; }
+  .project-desc-short { font-size: 12.5px; line-height: 1.5; }
+  .project-tag { font-size: 9.5px; padding: 3px 8px; letter-spacing: 0.08em; }
+  .project-link-btn { font-size: 10px; padding: 4px 9px; }
+  .project-stack { gap: 4px; padding-top: 8px; margin-top: 4px; }
+  .project-stack span { font-size: 10px; padding: 3px 8px; }
+  .project-role { padding-top: 12px; gap: 4px; }
+  .role-label { font-size: 9px; letter-spacing: 0.1em; }
+  .role-text { font-size: 12.5px; }
+  .trophy-badge { top: 18px; right: 18px; font-size: 10px; padding: 4px 9px; }
+  .project-header { gap: 8px; }
+
+  /* Animation widgets: compact on phone */
+  .project-anima--radar { width: 48px; height: 48px; margin-top: 10px; }
+  .project-anima--radar .radar-ring-bg,
+  .project-anima--radar .radar-sweep { width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
+  .project-anima--orbit { width: 56px; height: 56px; margin-top: 10px; }
+  .project-anima--sparkline { height: 44px; margin-top: 10px; }
+  .algo-visual { height: 64px; gap: 4px; }
+
+  /* Skills card tightening */
+  .skill-card { padding: 20px 18px; gap: 14px; }
+  .skill-title { font-size: 17px; }
+  .skill-tags { gap: 6px 8px; }
+  .skill-tags span { padding: 6px 11px; font-size: 11px; }
+  .skills-divider { padding: 2px 0; }
+
+  /* Education card */
+  .edu-card { padding: 20px 18px; gap: 16px; }
+  .edu-marker { width: 46px; height: 46px; }
+  .edu-title { font-size: 19px; }
+  .edu-subtitle { font-size: 13px; }
+  .edu-focus { gap: 6px 8px; padding-top: 10px; margin-top: 6px; }
+  .focus-item { font-size: 10.5px; padding: 4px 10px; }
+
+  /* Contact section */
+  .section-contact { padding: 60px 0 80px; }
+  .section-contact::before { width: 420px; height: 420px; top: 80px; right: -180px; }
+  .contact-inner { gap: 24px; }
+  .contact-title { font-size: clamp(28px, 8vw, 36px); }
+  .contact-sub { font-size: 14px; max-width: 100%; }
+  .contact-window-code { padding: 16px 16px 18px; font-size: 10.5px; line-height: 1.7; }
+  .cw-status { font-size: 9.5px; }
+
+  .contact-links { gap: 10px; margin-top: 16px; }
+  .contact-card {
+    padding: 12px 14px;
+    gap: 12px;
+    grid-template-columns: auto 1fr auto;
+  }
+  .contact-card-icon { width: 34px; height: 34px; border-radius: 8px; }
+  .contact-card-label { font-size: 9px; letter-spacing: 0.12em; }
+  .contact-card-value {
+    white-space: normal;
+    font-size: 11.5px;
+    line-height: 1.35;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  .contact-card-arrow { width: 24px; height: 24px; }
+
+  /* Code chips: smaller on phone */
+  .code-chip-body { font-size: 10.5px !important; line-height: 1.6 !important; padding: 12px 14px !important; }
+  .code-chip-bar { padding: 8px 12px !important; }
+  .code-chip-name { font-size: 10px !important; }
+
+  /* Mobile menu: slightly tighter on phone */
+  .mobile-menu-inner { gap: 24px; }
+  .mobile-nav-links { gap: 6px; }
+  .mobile-link { font-size: clamp(24px, 7vw, 32px); padding: 6px 12px; }
+  .mobile-social a { padding: 8px 16px; font-size: 12px; }
+
+  /* Footer stacked on phone */
+  .footer-inner { flex-direction: column; gap: 8px; align-items: center; }
+  .footer-sep { display: none; }
+}
+
+@media (max-width: 360px) {
+  .hero-avatar { width: 88px; height: 88px; }
+  .hero-headline { font-size: clamp(26px, 11vw, 34px); }
+  .skill-tags span { padding: 5px 9px; font-size: 10.5px; }
+  .contact-card-value { font-size: 11px; }
 }
