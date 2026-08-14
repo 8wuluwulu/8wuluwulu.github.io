@@ -2109,7 +2109,14 @@ button {
   }
 
   .section-head {
-    margin-bottom: 36px;
+    margin-bottom: 28px;
+  }
+
+  /* skills-chip: on tablets make it full-width stacked, so it doesn't squeeze against the title */
+  .skills-chip,
+  .projects-chip,
+  .education-chip {
+    max-width: 100%;
   }
 
   .about-grid {
@@ -2257,6 +2264,15 @@ button {
   .skills-grid {
     gap: 14px;
     grid-template-columns: 1fr;
+  }
+  .skill-card,
+  .skill-card--wide {
+    grid-column: span 1;
+  }
+  /* Desktop rule has `grid-column: span 12` — must override, else grid creates
+     12 implicit columns and cards shrink to 1/12 width. */
+  .skills-divider {
+    grid-column: span 1;
   }
   .skill-card {
     padding: 18px 16px;
