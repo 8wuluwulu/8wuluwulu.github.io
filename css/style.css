@@ -688,26 +688,72 @@ button {
   overflow-x: hidden;
 }
 
-/* Section-specific chip placement */
+/* Section-specific chip placement — centered below section content */
 .projects-chip {
-  position: absolute;
-  top: 60px;
-  right: 0;
+  margin: 36px auto 0;
+  max-width: 420px;
 }
 
 .skills-chip {
-  margin: 0 auto 40px;
+  margin: 36px auto 0;
+  max-width: 420px;
 }
 
 .education-chip {
-  margin-top: 28px;
+  margin: 32px auto 0;
+  max-width: 420px;
 }
 
 @media (max-width: 768px) {
-  .projects-chip {
-    position: static;
-    margin: 0 auto 32px;
+  .projects-chip,
+  .skills-chip,
+  .education-chip {
     max-width: 100%;
+  }
+}
+
+/* ---------- Hero Resume Button ---------- */
+.hero-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  margin-top: 22px;
+  border-radius: var(--radius-pill);
+  border: 1px dashed var(--border-hair);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-premium);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroReveal 0.8s var(--ease-premium) 0.95s forwards;
+}
+
+.hero-resume:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--text-primary);
+  background: rgba(129, 140, 248, 0.08);
+}
+
+.hero-resume svg {
+  transition: transform 0.3s var(--ease-premium);
+}
+
+.hero-resume:hover svg {
+  transform: translate(2px, 2px);
+}
+
+@media (max-width: 768px) {
+  .hero-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
 }
 

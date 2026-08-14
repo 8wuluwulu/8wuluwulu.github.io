@@ -86,6 +86,11 @@
           </a>
         </div>
 
+        <a href="resume.pdf" download="resume_Egor_Sukhanov.pdf" class="hero-resume">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v13M5 13l7 7 7-7M4 21h16"/></svg>
+          Скачать резюме
+        </a>
+
         <div class="hero-badges">
           <span class="badge"><span class="badge-dot"></span>20 лет</span>
           <span class="badge"><span class="badge-dot"></span>Кострома</span>
@@ -125,19 +130,6 @@
       <h2 class="section-title">
         Избранные <em>работы</em>
       </h2>
-    </div>
-
-    <div class="code-chip projects-chip reveal">
-      <div class="code-chip-bar">
-        <span class="code-chip-dot c-red"></span>
-        <span class="code-chip-dot c-yellow"></span>
-        <span class="code-chip-dot c-green"></span>
-        <span class="code-chip-name">projects.py</span>
-      </div>
-<pre class="code-chip-body"><span class="c-keyword">async def</span> <span class="c-var">get_projects</span>(<span class="c-keyword">db</span>) -> <span class="c-var">list</span>:
-    <span class="c-keyword">return</span> <span class="c-var">await db</span>.<span class="c-key">select</span>(<span class="c-var">Project</span>) \
-        .<span class="c-key">where</span>(<span class="c-str">"status"</span>, <span class="c-bool">"shipped"</span>) \
-        .<span class="c-key">order_by</span>(<span class="c-str">"impact"</span>)  <span class="c-comment"># 3 hits</span></pre>
     </div>
 
     <div class="projects-grid">
@@ -226,6 +218,19 @@
       </article>
 
     </div>
+
+    <div class="code-chip projects-chip reveal">
+      <div class="code-chip-bar">
+        <span class="code-chip-dot c-red"></span>
+        <span class="code-chip-dot c-yellow"></span>
+        <span class="code-chip-dot c-green"></span>
+        <span class="code-chip-name">projects.py</span>
+      </div>
+<pre class="code-chip-body"><span class="c-keyword">async def</span> <span class="c-var">get_projects</span>(<span class="c-keyword">db</span>) -> <span class="c-var">list</span>:
+    <span class="c-keyword">return</span> <span class="c-var">await db</span>.<span class="c-key">select</span>(<span class="c-var">Project</span>) \
+        .<span class="c-key">where</span>(<span class="c-str">"status"</span>, <span class="c-bool">"shipped"</span>) \
+        .<span class="c-key">order_by</span>(<span class="c-str">"impact"</span>)  <span class="c-comment"># 3 hits</span></pre>
+    </div>
   </div>
 </section>
 
@@ -235,18 +240,6 @@
       <h2 class="section-title">
         Технический <em>стек</em>
       </h2>
-    </div>
-
-    <div class="code-chip skills-chip reveal">
-      <div class="code-chip-bar">
-        <span class="code-chip-dot c-red"></span>
-        <span class="code-chip-dot c-yellow"></span>
-        <span class="code-chip-dot c-green"></span>
-        <span class="code-chip-name">stack.sh</span>
-      </div>
-<pre class="code-chip-body"><span class="c-keyword">$</span> <span class="c-var">cat</span> <span class="c-str">STACK</span> | <span class="c-keyword">for</span> <span class="c-var">lang</span> <span class="c-keyword">in</span> <span class="c-str">python js sql</span>; <span class="c-keyword">do</span>
-  <span class="c-keyword">echo</span> <span class="c-str">"▸ $lang — production-ready"</span>
-<span class="c-keyword">done</span>  <span class="c-comment"># → 7 tools active</span></pre>
     </div>
 
     <div class="skills-grid">
@@ -305,6 +298,18 @@
           <span>Claude</span><span>Gemini</span><span>Git</span><span>GitHub</span><span>AI-агенты</span><span>Kafka</span>
         </div>
       </div>
+    </div>
+
+    <div class="code-chip skills-chip reveal">
+      <div class="code-chip-bar">
+        <span class="code-chip-dot c-red"></span>
+        <span class="code-chip-dot c-yellow"></span>
+        <span class="code-chip-dot c-green"></span>
+        <span class="code-chip-name">stack.sh</span>
+      </div>
+<pre class="code-chip-body"><span class="c-keyword">$</span> <span class="c-var">cat</span> <span class="c-str">STACK</span> | <span class="c-keyword">for</span> <span class="c-var">lang</span> <span class="c-keyword">in</span> <span class="c-str">python js sql</span>; <span class="c-keyword">do</span>
+  <span class="c-keyword">echo</span> <span class="c-str">"▸ $lang — production-ready"</span>
+<span class="c-keyword">done</span>  <span class="c-comment"># → 7 tools active</span></pre>
     </div>
   </div>
 </section>
