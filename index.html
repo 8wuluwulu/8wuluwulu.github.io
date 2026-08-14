@@ -81,15 +81,11 @@
             Смотреть проекты
             <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
           </a>
-          <a href="https://t.me/nudnuyyyyyy" target="_blank" rel="noopener" class="btn btn-ghost">
-            Связаться
+          <a href="resume.pdf" download="resume_Egor_Sukhanov.pdf" class="btn btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v13M5 13l7 7 7-7M4 21h16"/></svg>
+            Скачать резюме
           </a>
         </div>
-
-        <a href="resume.pdf" download="resume_Egor_Sukhanov.pdf" class="hero-resume">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v13M5 13l7 7 7-7M4 21h16"/></svg>
-          Скачать резюме
-        </a>
 
         <div class="hero-badges">
           <span class="badge"><span class="badge-dot"></span>20 лет</span>
@@ -130,6 +126,19 @@
       <h2 class="section-title">
         Избранные <em>работы</em>
       </h2>
+
+      <div class="code-chip projects-chip reveal">
+        <div class="code-chip-bar">
+          <span class="code-chip-dot c-red"></span>
+          <span class="code-chip-dot c-yellow"></span>
+          <span class="code-chip-dot c-green"></span>
+          <span class="code-chip-name">projects.py</span>
+        </div>
+<pre class="code-chip-body"><span class="c-keyword">async def</span> <span class="c-var">get_projects</span>(<span class="c-keyword">db</span>):
+    <span class="c-keyword">return</span> <span class="c-var">await db</span>.<span class="c-key">select</span>(<span class="c-var">Project</span>) \
+        .<span class="c-key">where</span>(<span class="c-str">"status"</span>, <span class="c-bool">"shipped"</span>) \
+        .<span class="c-key">order_by</span>(<span class="c-str">"impact"</span>)</pre>
+      </div>
     </div>
 
     <div class="projects-grid">
@@ -218,19 +227,6 @@
       </article>
 
     </div>
-
-    <div class="code-chip projects-chip reveal">
-      <div class="code-chip-bar">
-        <span class="code-chip-dot c-red"></span>
-        <span class="code-chip-dot c-yellow"></span>
-        <span class="code-chip-dot c-green"></span>
-        <span class="code-chip-name">projects.py</span>
-      </div>
-<pre class="code-chip-body"><span class="c-keyword">async def</span> <span class="c-var">get_projects</span>(<span class="c-keyword">db</span>) -> <span class="c-var">list</span>:
-    <span class="c-keyword">return</span> <span class="c-var">await db</span>.<span class="c-key">select</span>(<span class="c-var">Project</span>) \
-        .<span class="c-key">where</span>(<span class="c-str">"status"</span>, <span class="c-bool">"shipped"</span>) \
-        .<span class="c-key">order_by</span>(<span class="c-str">"impact"</span>)  <span class="c-comment"># 3 hits</span></pre>
-    </div>
   </div>
 </section>
 
@@ -240,6 +236,18 @@
       <h2 class="section-title">
         Технический <em>стек</em>
       </h2>
+
+      <div class="code-chip skills-chip reveal">
+        <div class="code-chip-bar">
+          <span class="code-chip-dot c-red"></span>
+          <span class="code-chip-dot c-yellow"></span>
+          <span class="code-chip-dot c-green"></span>
+          <span class="code-chip-name">stack.sh</span>
+        </div>
+<pre class="code-chip-body"><span class="c-keyword">$</span> <span class="c-var">cat</span> <span class="c-str">STACK</span> | <span class="c-keyword">for</span> <span class="c-var">lang</span> <span class="c-keyword">in</span> <span class="c-str">py js sql</span>
+  <span class="c-keyword">echo</span> <span class="c-str">"▸ $lang — ready"</span>
+<span class="c-keyword">done</span></pre>
+      </div>
     </div>
 
     <div class="skills-grid">
@@ -299,18 +307,6 @@
         </div>
       </div>
     </div>
-
-    <div class="code-chip skills-chip reveal">
-      <div class="code-chip-bar">
-        <span class="code-chip-dot c-red"></span>
-        <span class="code-chip-dot c-yellow"></span>
-        <span class="code-chip-dot c-green"></span>
-        <span class="code-chip-name">stack.sh</span>
-      </div>
-<pre class="code-chip-body"><span class="c-keyword">$</span> <span class="c-var">cat</span> <span class="c-str">STACK</span> | <span class="c-keyword">for</span> <span class="c-var">lang</span> <span class="c-keyword">in</span> <span class="c-str">python js sql</span>; <span class="c-keyword">do</span>
-  <span class="c-keyword">echo</span> <span class="c-str">"▸ $lang — production-ready"</span>
-<span class="c-keyword">done</span>  <span class="c-comment"># → 7 tools active</span></pre>
-    </div>
   </div>
 </section>
 
@@ -321,6 +317,19 @@
       <h2 class="section-title">
         Образование <em>и фокус</em>
       </h2>
+
+      <div class="code-chip education-chip reveal">
+        <div class="code-chip-bar">
+          <span class="code-chip-dot c-red"></span>
+          <span class="code-chip-dot c-yellow"></span>
+          <span class="code-chip-dot c-green"></span>
+          <span class="code-chip-name">student.yaml</span>
+        </div>
+<pre class="code-chip-body"><span class="c-var">student</span>:
+  <span class="c-key">university</span>: <span class="c-str">"КГУ"</span>
+  <span class="c-key">course</span>: <span class="c-bool">3</span>
+  <span class="c-key">focus</span>: [<span class="c-str">"Python"</span>, <span class="c-str">"DB"</span>, <span class="c-str">"Team"</span>]</pre>
+      </div>
     </div>
 
     <div class="edu-card reveal">
@@ -341,22 +350,6 @@
           <span class="focus-item">Командная разработка</span>
         </div>
       </div>
-    </div>
-
-    <div class="code-chip education-chip reveal">
-      <div class="code-chip-bar">
-        <span class="code-chip-dot c-red"></span>
-        <span class="code-chip-dot c-yellow"></span>
-        <span class="code-chip-dot c-green"></span>
-        <span class="code-chip-name">student.yaml</span>
-      </div>
-<pre class="code-chip-body"><span class="c-var">student</span>:
-  <span class="c-key">university</span>: <span class="c-str">"КГУ"</span>
-  <span class="c-key">course</span>: <span class="c-bool">3</span>
-  <span class="c-key">focus</span>:
-    - <span class="c-str">"Python"</span>
-    - <span class="c-str">"Bases"</span>
-    - <span class="c-str">"TeamDev"</span>  <span class="c-comment"># КГУ 2026</span></pre>
     </div>
   </div>
 </section>
@@ -398,7 +391,7 @@
         <div class="contact-links">
           <a href="https://t.me/nudnuyyyyyy" target="_blank" rel="noopener" class="contact-card reveal">
             <span class="contact-card-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4L12 13.5M22 4l-7 20-4.5-9.5L2 4l20 0z"/></svg>
+              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20.665 3.717l-16.739 6.9c-1.09.459-1.09 1.094-.005 1.552l4.273 1.77 8.36-5.176c.39-.24.75-.112.46.164l-6.722 6.076-.273 4.216c.402 0 .578-.18.913-.515l1.77-1.777 3.686 2.737c.68.39 1.174.192 1.34-.716l2.587-12.288c.253-1.233-.427-1.776-1.218-1.424z" opacity="0.92"/></svg>
             </span>
             <div class="contact-card-body">
               <span class="contact-card-label">Telegram</span>
@@ -410,7 +403,7 @@
           </a>
           <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="contact-card reveal">
             <span class="contact-card-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.5 0-6-2-6-5 0-2 1.3-3.6 2.8-4.4-.3-.9-.5-1.7-.5-2.6 0-.6.1-1.1.3-1.6 3.4-.6 7.2.5 9.4 3.3 2.2-2.8 6-3.9 9.4-3.3.2.5.3 1 .3 1.6 0 .9-.2 1.7-.5 2.6 1.5.8 2.8 2.4 2.8 4.4 0 3-1.5 5-6 5"/></svg>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.1-.65.35-1.1.64-1.36-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
             </span>
             <div class="contact-card-body">
               <span class="contact-card-label">GitHub</span>
