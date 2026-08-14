@@ -2223,8 +2223,8 @@ button {
     padding: 20px 18px;
     gap: 8px;
   }
-  .project-title { font-size: 22px; }
-  .project-title--small { font-size: 20px; }
+  .project-title { font-size: 21px; }
+  .project-title--small { font-size: 19px; }
   .project-desc { font-size: 12.5px; line-height: 1.55; }
   .project-desc-short { font-size: 12.5px; line-height: 1.5; }
   .project-tag { font-size: 9.5px; padding: 3px 8px; letter-spacing: 0.08em; }
@@ -2234,8 +2234,16 @@ button {
   .project-role { padding-top: 12px; gap: 4px; }
   .role-label { font-size: 9px; letter-spacing: 0.1em; }
   .role-text { font-size: 12.5px; }
-  .trophy-badge { top: 18px; right: 18px; font-size: 10px; padding: 4px 9px; }
-  .project-header { gap: 8px; }
+  /* trophy badge: stack below header on narrow phones so it never overlaps the title */
+  .project-header { position: relative; flex-wrap: wrap; }
+  .trophy-badge {
+    position: static;
+    top: auto;
+    right: auto;
+    font-size: 9.5px;
+    padding: 3px 8px;
+    margin-left: 4px;
+  }
 
   /* Animation widgets: compact on phone */
   .project-anima--radar { width: 48px; height: 48px; margin-top: 10px; }
@@ -2253,10 +2261,22 @@ button {
   .skills-divider { padding: 2px 0; }
 
   /* Education card */
-  .edu-card { padding: 20px 18px; gap: 16px; }
+  .edu-card { padding: 22px 18px; gap: 18px; }
   .edu-marker { width: 46px; height: 46px; }
   .edu-title { font-size: 19px; }
   .edu-subtitle { font-size: 13px; }
+  /* stack marker + text vertically on tiny phones (grid is already 1-col) */
+  .edu-left {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px;
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--border-hair);
+    padding-bottom: 18px;
+  }
+  .edu-right { gap: 8px; }
   .edu-focus { gap: 6px 8px; padding-top: 10px; margin-top: 6px; }
   .focus-item { font-size: 10.5px; padding: 4px 10px; }
 
@@ -2272,22 +2292,24 @@ button {
   .contact-links { gap: 10px; margin-top: 16px; }
   .contact-card {
     padding: 12px 14px;
-    gap: 12px;
+    gap: 10px;
     grid-template-columns: auto 1fr auto;
+    align-items: center;
   }
-  .contact-card-icon { width: 34px; height: 34px; border-radius: 8px; }
+  .contact-card-icon { width: 32px; height: 32px; border-radius: 8px; }
+  .contact-card-body { min-width: 0; gap: 2px; }
   .contact-card-label { font-size: 9px; letter-spacing: 0.12em; }
   .contact-card-value {
-    white-space: normal;
+    white-space: nowrap;
     font-size: 11.5px;
     line-height: 1.35;
-    overflow: visible;
-    text-overflow: clip;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .contact-card-arrow { width: 24px; height: 24px; }
+  .contact-card-arrow { width: 22px; height: 22px; }
 
-  /* Code chips: smaller on phone */
-  .code-chip-body { font-size: 10.5px !important; line-height: 1.6 !important; padding: 12px 14px !important; }
+  /* Code chips: smaller on phone; allow pre to wrap so long lines don't clip */
+  .code-chip-body { font-size: 10.5px !important; line-height: 1.6 !important; padding: 12px 14px !important; white-space: pre-wrap !important; word-break: break-word !important; }
   .code-chip-bar { padding: 8px 12px !important; }
   .code-chip-name { font-size: 10px !important; }
 

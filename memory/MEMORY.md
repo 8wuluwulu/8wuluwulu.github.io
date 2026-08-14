@@ -1,0 +1,1 @@
+- [User phone device](memory/user-phone-device.md) — User's phone is Samsung Galaxy S10 (480px logical width).
