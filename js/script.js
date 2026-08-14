@@ -153,7 +153,7 @@
 
     async function startSortLoop(container) {
       shuffleBars(container);
-      await sleep(800);
+      await sleep(1500);
 
       var bars = container.querySelectorAll(".algo-bar");
       var heights = [];
@@ -171,7 +171,7 @@
           b.style.background = "linear-gradient(180deg, #ffd27a, #f59e0b)";
           b.style.boxShadow = "0 0 10px rgba(245, 158, 11, 0.6)";
 
-          await sleep(120);
+          await sleep(400);
 
           if (heights[i] > heights[i + 1]) {
             var swap = heights[i];
@@ -179,7 +179,7 @@
             heights[i + 1] = swap;
             a.style.height = heights[i] + "%";
             b.style.height = heights[i + 1] + "%";
-            await sleep(80);
+            await sleep(250);
           }
 
           // reset colors to sorted-done accent
@@ -196,7 +196,7 @@
       lastBar.style.background = "linear-gradient(180deg, #a8b8ff, var(--accent))";
       lastBar.style.boxShadow = "0 0 10px var(--accent-glow-strong)";
 
-      await sleep(2000);
+      await sleep(3000);
       startSortLoop(container);
     }
   }

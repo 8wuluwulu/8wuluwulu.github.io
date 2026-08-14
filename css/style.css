@@ -1008,12 +1008,11 @@ button {
 
 /* === 1) Hackathon — radar sweep scan (like a real radar screen) === */
 .project-anima--radar {
-  position: absolute;
-  top: 22px;
-  right: 22px;
+  margin-top: auto;
   width: 60px;
   height: 60px;
   color: #f59e0b;
+  align-self: center;
 }
 /* static circular "screen" */
 .project-anima--radar .radar-ring-bg {
@@ -1087,12 +1086,12 @@ button {
 /* Two ring wrappers each spin independently; dots are statically positioned
    on their ring (no translate-in-keyframes = butter-smooth). */
 .project-anima--orbit {
-  position: absolute;
-  top: 22px;
-  right: 22px;
-  width: 60px;
-  height: 60px;
+  position: relative;
+  margin-top: auto;
+  width: 72px;
+  height: 72px;
   color: var(--accent);
+  align-self: center;
 }
 .project-anima--orbit .orbit-bg {
   position: absolute;
@@ -1189,12 +1188,12 @@ button {
 
 /* === 3) Dashboard — SVG sparkline draw effect === */
 .project-anima--sparkline {
-  width: 84px;
-  height: 28px;
+  width: 100%;
+  height: 60px;
   color: var(--accent);
-  margin-top: auto;
+  margin-top: 16px;
   margin-bottom: 4px;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 .project-anima--sparkline svg {
   width: 100%;
@@ -1222,32 +1221,36 @@ button {
 .algo-visual {
   display: flex;
   align-items: flex-end;
-  justify-content: center;
-  gap: 6px;
-  height: 60px;
-  margin-bottom: 4px;
-  padding: 4px 10px;
+  justify-content: flex-start;
+  gap: 5px;
+  height: 90px;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 8px 12px;
   border-radius: var(--radius-sm);
   background: rgba(123, 147, 255, 0.04);
   border: 1px solid rgba(123, 147, 255, 0.08);
 }
 .algo-bar {
-  width: 14px;
+  flex: 1;
+  min-width: 0;
   height: var(--h);
   border-radius: 2px 2px 0 0;
   background: linear-gradient(180deg, var(--accent), var(--accent-dim));
   box-shadow: 0 0 6px var(--accent-glow);
-  transition: height 0.5s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s, box-shadow 0.4s;
+  transition: height 0.7s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s, box-shadow 0.4s;
 }
 /* Sorted state — bars settle in ascending order */
-.algo-visual.sorted .algo-bar:nth-child(1) { height: 38%; }
-.algo-visual.sorted .algo-bar:nth-child(2) { height: 44%; }
-.algo-visual.sorted .algo-bar:nth-child(3) { height: 50%; }
-.algo-visual.sorted .algo-bar:nth-child(4) { height: 56%; }
-.algo-visual.sorted .algo-bar:nth-child(5) { height: 62%; }
-.algo-visual.sorted .algo-bar:nth-child(6) { height: 68%; }
-.algo-visual.sorted .algo-bar:nth-child(7) { height: 74%; }
-.algo-visual.sorted .algo-bar:nth-child(8) { height: 82%; }
+.algo-visual.sorted .algo-bar:nth-child(1) { height: 32%; }
+.algo-visual.sorted .algo-bar:nth-child(2) { height: 38%; }
+.algo-visual.sorted .algo-bar:nth-child(3) { height: 44%; }
+.algo-visual.sorted .algo-bar:nth-child(4) { height: 50%; }
+.algo-visual.sorted .algo-bar:nth-child(5) { height: 56%; }
+.algo-visual.sorted .algo-bar:nth-child(6) { height: 62%; }
+.algo-visual.sorted .algo-bar:nth-child(7) { height: 68%; }
+.algo-visual.sorted .algo-bar:nth-child(8) { height: 74%; }
+.algo-visual.sorted .algo-bar:nth-child(9) { height: 80%; }
+.algo-visual.sorted .algo-bar:nth-child(10) { height: 86%; }
 .algo-visual.sorted .algo-bar {
   background: linear-gradient(180deg, #a8b8ff, var(--accent));
   box-shadow: 0 0 10px var(--accent-glow-strong);
