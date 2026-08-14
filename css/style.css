@@ -1006,100 +1006,181 @@ button {
   color: var(--accent);
 }
 
-/* === 1) Hackathon — radar ping (signal broadcast) === */
-/* Absolutely positioned top-right of the card so it's not squeezed by the header flex */
+/* === 1) Hackathon — radar sweep scan (like a real radar screen) === */
 .project-anima--radar {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 52px;
-  height: 52px;
+  top: 22px;
+  right: 22px;
+  width: 60px;
+  height: 60px;
   color: #f59e0b;
 }
-.project-anima--radar .radar-center {
+/* static circular "screen" */
+.project-anima--radar .radar-ring-bg {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 7px;
-  height: 7px;
-  margin-left: -3.5px;
-  margin-top: -3.5px;
-  border-radius: 50%;
-  background: #f59e0b;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.85), 0 0 20px rgba(245, 158, 11, 0.35);
-}
-.project-anima--radar .radar-ring {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 16px;
-  height: 16px;
-  margin-left: -8px;
-  margin-top: -8px;
-  border: 1px solid rgba(245, 158, 11, 0.6);
-  border-radius: 50%;
-  animation: radarPing 2.6s cubic-bezier(0.25, 0.8, 0.3, 1) infinite;
-}
-.project-anima--radar .radar-ring:nth-child(3) { animation-delay: -0.87s; }
-.project-anima--radar .radar-ring:nth-child(4) { animation-delay: -1.73s; }
-@keyframes radarPing {
-  0%   { transform: scale(1);   opacity: 0.85; border-width: 1.5px; }
-  100% { transform: scale(2.8); opacity: 0;    border-width: 0.5px; }
-}
-
-/* === 2) AcademicLink — three dots orbiting a center === */
-/* Absolutely positioned top-right like radar, for consistent card corner placement */
-.project-anima--orbit {
-  position: absolute;
-  top: 18px;
-  right: 22px;
   width: 56px;
   height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background:
+    radial-gradient(circle, transparent 0 19px, rgba(245, 158, 11, 0.18) 20px 21px, transparent 22px),
+    rgba(245, 158, 11, 0.04);
 }
-.project-anima--orbit .orbit-group {
-  position: absolute;
-  inset: 0;
-  animation: orbitSpin 4.5s linear infinite;
-}
-.project-anima--orbit .orbit-group span {
+/* central glowing dot (the target being scanned) */
+.project-anima--radar .radar-dot {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 6px;
-  height: 6px;
-  margin-left: -3px;
-  margin-top: -3px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  margin-top: -2px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.9);
+}
+/* rotating sweep wedge */
+.project-anima--radar .radar-sweep {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(245, 158, 11, 0.4) 0deg 45deg,
+    transparent 45deg 360deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 10px, #000 10px);
+  mask: radial-gradient(circle, transparent 10px, #000 10px);
+  animation: radarSweep 2.8s linear infinite;
+}
+@keyframes radarSweep {
+  to { transform: rotate(360deg); }
+}
+.project-anima--radar .radar-ping {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  margin-top: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 158, 11, 0.6);
+  animation: radarPing 2.2s ease-out infinite;
+  opacity: 0;
+}
+@keyframes radarPing {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(6); opacity: 0; }
+}
+
+/* === 2) AcademicLink — dual-ring orbit, two rings counter-rotating === */
+/* Two ring wrappers each spin independently; dots are statically positioned
+   on their ring (no translate-in-keyframes = butter-smooth). */
+.project-anima--orbit {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 60px;
+  height: 60px;
+  color: var(--accent);
+}
+.project-anima--orbit .orbit-bg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+  border-radius: 50%;
+  border: 1px dashed rgba(123, 147, 255, 0.22);
+}
+.project-anima--orbit .orbit-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  margin-top: -2.5px;
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 8px var(--accent);
+  opacity: 0.9;
 }
-/* 3 dots at 120° apart — each uses rotate+translate so the container's own spin stacks smoothly */
-.project-anima--orbit .orbit-group span:nth-child(1) {
-  transform: rotate(0deg)   translate(22px) rotate(0deg);
-}
-.project-anima--orbit .orbit-group span:nth-child(2) {
-  transform: rotate(120deg) translate(22px) rotate(-120deg);
-  background: var(--accent);
-  opacity: 0.85;
-}
-.project-anima--orbit .orbit-group span:nth-child(3) {
-  transform: rotate(240deg) translate(22px) rotate(-240deg);
-  background: var(--accent-dim);
-  opacity: 0.6;
-  box-shadow: 0 0 6px var(--accent-dim);
-}
-/* Faint guide ring under the dots */
-.project-anima--orbit::before {
-  content: "";
+.project-anima--orbit .orbit-outer {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 44px;
-  height: 44px;
-  margin-left: -22px;
-  margin-top: -22px;
+  width: 60px;
+  height: 60px;
+  margin-left: -30px;
+  margin-top: -30px;
+  animation: orbitSpin 6s linear infinite;
+}
+.project-anima--orbit .orbit-inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  margin-left: -18px;
+  margin-top: -18px;
+  animation: orbitSpin 4s linear infinite reverse;
+}
+/* Dots positioned at fixed offsets relative to their ring's center.
+   Each ring rotates as a whole → dots orbit smoothly with no jank. */
+.project-anima--orbit .orbit-outer span,
+.project-anima--orbit .orbit-inner span {
+  position: absolute;
   border-radius: 50%;
-  border: 1px dashed rgba(123, 147, 255, 0.18);
+}
+.project-anima--orbit .orbit-outer span {
+  width: 5px;
+  height: 5px;
+  left: 30px;
+  top: 6px;         /* 30 − 24 = 6  (r=24) */
+  margin-left: -2.5px;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+/* 3 dots at 0° / 120° / 240° around r=24 in a 60×60 container */
+.project-anima--orbit .orbit-outer span:nth-child(1) {
+  left: 30px; top: 6px;
+}
+.project-anima--orbit .orbit-outer span:nth-child(2) {
+  left: 50.78px; top: 42px;
+  opacity: 0.75;
+}
+.project-anima--orbit .orbit-outer span:nth-child(3) {
+  left: 9.22px; top: 42px;
+  background: var(--accent-dim);
+  box-shadow: 0 0 5px var(--accent-dim);
+  opacity: 0.55;
+}
+/* 2 smaller dots at 0° / 180° around r=14 in a 36×36 container */
+.project-anima--orbit .orbit-inner span {
+  width: 3px;
+  height: 3px;
+  left: 18px;
+  top: 4px;         /* 18 − 14 = 4  (r=14) */
+  margin-left: -1.5px;
+  background: var(--accent);
+  box-shadow: 0 0 4px var(--accent);
+  opacity: 0.85;
+}
+.project-anima--orbit .orbit-inner span:nth-child(2) {
+  left: 18px; top: 32px; /* 18 + 14 = 32 */
 }
 @keyframes orbitSpin {
   from { transform: rotate(0deg); }
@@ -1178,12 +1259,13 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-anima--radar .radar-ring,
-  .project-anima--orbit .orbit-group,
+  .project-anima--radar .radar-sweep,
+  .project-anima--radar .radar-ping,
+  .project-anima--orbit .orbit-outer,
+  .project-anima--orbit .orbit-inner,
   .spark-path,
   .spark-glow,
-  .skill-icon::after,
-  .skill-tags span::before { animation: none; }
+  .skill-icon::after { animation: none; }
 }
 
 /* ---------- Skills ---------- */
@@ -1332,38 +1414,6 @@ button {
   transition: color 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth);
 }
 
-/* continuous shimmer sweep across tags */
-.skill-tags span::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(123, 147, 255, 0.12) 40%,
-    rgba(123, 147, 255, 0.22) 50%,
-    rgba(123, 147, 255, 0.12) 60%,
-    transparent 100%
-  );
-  animation: shimmer 4s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%   { left: -100%; }
-  100% { left: 100%; }
-}
-
-.skill-tags span:nth-child(1)::before { animation-delay: 0s; }
-.skill-tags span:nth-child(2)::before { animation-delay: 0.3s; }
-.skill-tags span:nth-child(3)::before { animation-delay: 0.6s; }
-.skill-tags span:nth-child(4)::before { animation-delay: 0.9s; }
-.skill-tags span:nth-child(5)::before { animation-delay: 1.2s; }
-.skill-tags span:nth-child(6)::before { animation-delay: 1.5s; }
-.skill-tags span:nth-child(7)::before { animation-delay: 1.8s; }
-.skill-tags span:nth-child(8)::before { animation-delay: 2.1s; }
 .skill-tags span:hover {
   color: var(--accent);
   border-color: var(--accent-dim);
