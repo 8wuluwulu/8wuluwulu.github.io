@@ -1,7 +1,7 @@
 /* ============================================
    EGOR SUKHANOV — PORTFOLIO SCRIPT
    Lightweight: scroll reveal, nav behavior,
-   mobile menu, smooth anchors.
+   mobile menu, smooth anchors, project anims.
    ============================================ */
 
 (function () {
@@ -113,6 +113,96 @@
       }
     });
   }
+
+  // ---- Algo Visualizer: real bubble-sort demo ----
+  if (!prefersReducedMotion) {
+    var algoVisuals = document.querySelectorAll(".algo-visual");
+    for (var k = 0; k < algoVisuals.length; k++) {
+      startSortLoop(algoVisuals[k]);
+    }
+
+    function randomHeight() {
+      // heights between 30% and 88%
+      return Math.floor(30 + Math.random() * 59);
+    }
+
+    function shuffleBars(container) {
+      var bars = container.querySelectorAll(".algo-bar");
+      var heights = [];
+      for (var i = 0; i < bars.length; i++) {
+        heights.push(randomHeight());
+      }
+      // Fisher-Yates shuffle so heights differ from index order
+      for (var j = heights.length - 1; j > 0; j--) {
+        var idx = Math.floor(Math.random() * (j + 1));
+        var tmp = heights[j];
+        heights[j] = heights[idx];
+        heights[idx] = tmp;
+      }
+      for (var m = 0; m < bars.length; m++) {
+        bars[m].style.height = heights[m] + "%";
+      }
+      container.classList.remove("sorted");
+      container.classList.remove("shuffle");
+      container.classList.add("shuffle");
+    }
+
+    function sleep(ms) {
+      return new Promise(function (resolve) { setTimeout(resolve, ms); });
+    }
+
+    async function startSortLoop(container) {
+      shuffleBars(container);
+      await sleep(800);
+
+      var bars = container.querySelectorAll(".algo-bar");
+      var heights = [];
+      for (var i = 0; i < bars.length; i++) {
+        heights.push(parseInt(bars[i].style.height, 10));
+      }
+
+      // Bubble sort with per-swap pause and highlight
+      for (var pass = 0; pass < heights.length - 1; pass++) {
+        for (var i = 0; i < heights.length - 1 - pass; i++) {
+          var a = bars[i], b = bars[i + 1];
+          // highlight comparing pair
+          a.style.background = "linear-gradient(180deg, #ffd27a, #f59e0b)";
+          a.style.boxShadow = "0 0 10px rgba(245, 158, 11, 0.6)";
+          b.style.background = "linear-gradient(180deg, #ffd27a, #f59e0b)";
+          b.style.boxShadow = "0 0 10px rgba(245, 158, 11, 0.6)";
+
+          await sleep(120);
+
+          if (heights[i] > heights[i + 1]) {
+            var swap = heights[i];
+            heights[i] = heights[i + 1];
+            heights[i + 1] = swap;
+            a.style.height = heights[i] + "%";
+            b.style.height = heights[i + 1] + "%";
+            await sleep(80);
+          }
+
+          // reset colors to sorted-done accent
+          a.style.background = "linear-gradient(180deg, #a8b8ff, var(--accent))";
+          b.style.background = "linear-gradient(180deg, #a8b8ff, var(--accent))";
+          a.style.boxShadow = "0 0 10px var(--accent-glow-strong)";
+          b.style.boxShadow = "0 0 10px var(--accent-glow-strong)";
+        }
+      }
+
+      container.classList.add("sorted");
+      // ensure last bar is also glowing
+      var lastBar = bars[bars.length - 1];
+      lastBar.style.background = "linear-gradient(180deg, #a8b8ff, var(--accent))";
+      lastBar.style.boxShadow = "0 0 10px var(--accent-glow-strong)";
+
+      await sleep(2000);
+      startSortLoop(container);
+    }
+  }
+
+  // ---- Skill tag ripple on hover (accent wave sweep) ----
+  // No JS needed — handled via CSS .skill-tags span::before animation.
 
   // ---- Subtle orb parallax (GPU-only, passive) ----
   if (!prefersReducedMotion) {

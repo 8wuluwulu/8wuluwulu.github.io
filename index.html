@@ -101,14 +101,17 @@
             <span class="code-dot c-green"></span>
             <span class="code-filename">developer.py</span>
           </div>
-          <pre class="code-content"><span class="c-keyword">const</span> <span class="c-var">developer</span> = {
-  <span class="c-key">name</span>:    <span class="c-str">"Егор Суханов"</span>,
-  <span class="c-key">role</span>:    <span class="c-str">"Full-Stack"</span>,
-  <span class="c-key">stack</span>:   [<span class="c-str">"Python"</span>, <span class="c-str">"FastAPI"</span>,
-               <span class="c-str">"JavaScript"</span>, <span class="c-str">"SQL"</span>],
-  <span class="c-key">ai</span>:      <span class="c-bool">true</span>,
-  <span class="c-key">mvp</span>:     <span class="c-bool">true</span>
-}</pre>
+          <pre class="code-content"><span class="c-keyword">class</span> <span class="c-var">Developer</span>:
+    <span class="c-keyword">def</span> <span class="c-var">__init__</span>(<span class="c-keyword">self</span>):
+        <span class="c-keyword">self</span>.<span class="c-key">name</span> = <span class="c-str">"Егор Суханов"</span>
+        <span class="c-keyword">self</span>.<span class="c-key">role</span> = <span class="c-str">"Full-Stack"</span>
+        <span class="c-keyword">self</span>.<span class="c-key">stack</span> = [<span class="c-str">"Python"</span>, <span class="c-str">"FastAPI"</span>,
+                      <span class="c-str">"JavaScript"</span>, <span class="c-str">"SQL"</span>]
+        <span class="c-keyword">self</span>.<span class="c-key">ai</span> = <span class="c-bool">True</span>
+        <span class="c-keyword">self</span>.<span class="c-key">mvp</span> = <span class="c-bool">True</span>
+        <span class="c-keyword">self</span>.<span class="c-var">hire_me</span>()
+    <span class="c-keyword">def</span> <span class="c-var">hire_me</span>(<span class="c-keyword">self</span>):
+        <span class="c-keyword">return</span> <span class="c-str">"lets_talk.py"</span></pre>
         </div>
       </div>
     </div>
@@ -125,35 +128,19 @@
     </div>
 
     <div class="projects-grid">
-      <article class="project-card project-card--wide reveal">
-        <div class="project-card-inner">
-          <div class="project-header">
-            <div class="project-meta">
-              <span class="project-tag">CRM · SaaS</span>
-              <span class="project-year">2024-2025</span>
-            </div>
-            <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="project-link-btn">
-              GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-            </a>
-          </div>
-          <h3 class="project-title">AcademicLink</h3>
-          <p class="project-subtitle">CRM-система для репетиторов</p>
-          <p class="project-desc">
-            Коммерческий продукт для автоматизации работы репетиторов. Построил архитектуру бэкенда, удобную для интеграции с фронтендом и ботами.
-          </p>
-          <div class="project-stack">
-            <span>Python</span><span>FastAPI</span><span>Aiogram 3.x</span><span>SQLModel</span><span>PostgreSQL</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-card project-card--accent project-card--tall reveal">
+      <article class="project-card project-card--wide reveal" data-project="hack">
         <div class="project-card-inner">
           <div class="project-header">
             <div class="project-meta">
               <span class="project-tag">Хакатон · AI</span>
               <span class="trophy-badge">Победитель</span>
             </div>
+          </div>
+          <div class="project-anima project-anima--radar">
+            <div class="radar-center"></div>
+            <div class="radar-ring"></div>
+            <div class="radar-ring"></div>
+            <div class="radar-ring"></div>
           </div>
           <h3 class="project-title">Гид первокурсника</h3>
           <p class="project-subtitle">Победитель ИТ-хакатона КГУ</p>
@@ -167,7 +154,53 @@
         </div>
       </article>
 
+      <article class="project-card project-card--accent project-card--tall reveal"> 
+        <div class="project-card-inner">
+          <div class="project-header">
+            <div class="project-meta">
+              <span class="project-tag">CRM · SaaS</span>
+              <span class="project-year">2024-2025</span>
+            </div>
+            <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="project-link-btn">
+              GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+          <div class="project-anima project-anima--orbit">
+            <div class="orbit-group">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <h3 class="project-title">AcademicLink</h3>
+          <p class="project-subtitle">CRM-система для репетиторов</p>
+          <p class="project-desc">
+            Коммерческий продукт для автоматизации работы репетиторов. Построил архитектуру бэкенда, удобную для интеграции с фронтендом и ботами.
+          </p>
+          <div class="project-stack">
+            <span>Python</span><span>FastAPI</span><span>Aiogram 3.x</span><span>SQLModel</span><span>PostgreSQL</span>
+          </div>
+        </div>
+      </article>
+
       <article class="project-card project-card--narrow reveal">
+        <div class="project-card-inner">
+          <div class="project-header">
+            <span class="project-tag">Landing · Dashboard</span>
+          </div>
+          <h3 class="project-title">Dashboard &amp; Web-сервисы</h3>
+          <p class="project-desc">Серия адаптивных и оптимизированных страниц с высоким Performance и быстрым откликом.</p>
+          <div class="project-anima project-anima--sparkline">
+            <svg viewBox="0 0 80 24" preserveAspectRatio="none">
+              <polyline class="spark-path" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="0,18 12,12 24,16 36,6 48,10 60,2 72,8 80,4"/>
+              <polyline class="spark-glow" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" points="0,18 12,12 24,16 36,6 48,10 60,2 72,8 80,4"/>
+            </svg>
+          </div>
+          <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="project-link-btn">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card project-card--wide reveal">
         <div class="project-card-inner">
           <div class="project-header">
             <span class="project-tag">Web · Demo</span>
@@ -190,18 +223,7 @@
         </div>
       </article>
 
-      <article class="project-card project-card--wide reveal">
-        <div class="project-card-inner">
-          <div class="project-header">
-            <span class="project-tag">Landing · Dashboard</span>
-          </div>
-          <h3 class="project-title">Dashboard &amp; Web-сервисы</h3>
-          <p class="project-desc">Серия адаптивных и оптимизированных страниц с высоким Performance и быстрым откликом.</p>
-          <a href="https://github.com/8wuluwulu" target="_blank" rel="noopener" class="project-link-btn">
-            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-          </a>
-        </div>
-      </article>
+      
     </div>
   </div>
 </section>
@@ -214,7 +236,8 @@
       </h2>
     </div>
 
-    <div class="skill-card skill-card--wide reveal">
+    <div class="skills-grid">
+      <div class="skill-card skill-card--wide reveal">
         <div class="skill-card-head">
           <span class="skill-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12l4 4v12H4z"/><path d="M16 4v4h4"/><path d="M8 12l3 3-3 3M13 12h4"/></svg>
@@ -226,7 +249,14 @@
         </div>
       </div>
 
-    <div class="skills-grid">
+      <div class="skills-divider">
+        <span class="divider-line"></span>
+        <span class="divider-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M15 6l6 6-6 6"/></svg>
+          Frontend &amp; Инструменты
+        </span>
+        <span class="divider-line"></span>
+      </div>
       <div class="skill-card skill-card--wide reveal">
         <div class="skill-card-head">
           <span class="skill-icon">
