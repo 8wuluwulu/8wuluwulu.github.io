@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Папа OS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: one CRT monitor window centered, boot log → greeting → interactive shell; quick-command chips under it for phones */
+:root{
+  --bg:#040a1a;        /* deep navy behind the monitor */
+  --screen:#081633;    /* blue phosphor tube */
+  --amber:#6fb6ff;     /* main phosphor */
+  --amber-dim:#41679f; /* secondary text */
+  --hot:#e4f1ff;       /* overdriven highlight */
+  --ok:#7fe3c8;        /* status OK */
+  --frame:#12234a;     /* bezel */
+  --font-display:"VT323", "Courier New", monospace;
+  --font-body:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:radial-gradient(ellipse at 50% 0%, #0f2350 0%, var(--bg) 60%);
+  color:var(--amber);font-family:var(--font-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:20px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+}
+.monitor{
+  width:100%;max-width:880px;flex:1;min-height:0;
+  background:var(--frame);border-radius:18px;padding:14px;
+  box-shadow:0 30px 80px -20px #000, inset 0 2px 0 #24407a;
+  display:flex;flex-direction:column;
+}
+.bar{display:flex;align-items:center;gap:10px;padding:0 6px 10px;font-size:12px;color:var(--amber-dim);letter-spacing:.08em;text-transform:uppercase}
+.bar .led{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.bar .sp{flex:1}
+.screen{
+  position:relative;flex:1;min-height:420px;background:var(--screen);border-radius:10px;overflow:hidden;
+  box-shadow:inset 0 0 60px #000a, inset 0 0 0 1px #0006;
+}
+.screen::after{ /* scanlines */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(to bottom, #0000 0 2px, #00000038 2px 3px);
+  mix-blend-mode:multiply;
+}
+#out{
+  position:absolute;inset:0;overflow-y:auto;padding:18px 20px 22px;
+  text-shadow:0 0 6px #6fb6ff66;white-space:pre-wrap;word-break:break-word;
+  scrollbar-width:thin;scrollbar-color:var(--amber-dim) transparent;
+}
+.dim{color:var(--amber-dim)}
+.ok{color:var(--ok);text-shadow:0 0 6px #7fe3c866}
+.hot{color:var(--hot)}
+.big{
+  font-family:var(--font-display);font-size:clamp(46px, 11vw, 96px);line-height:.9;color:var(--hot);
+  text-shadow:0 0 10px var(--amber), 0 0 28px #2f7dff88;display:block;margin:10px 0 4px;text-wrap:balance;
+  white-space:normal;
+}
+.sub{font-family:var(--font-display);font-size:clamp(22px,4.5vw,30px);line-height:1.1;display:block}
+.letter{display:block;max-width:62ch;margin:12px 0;border-left:2px solid var(--amber-dim);padding-left:14px}
+pre.art{margin:0;font-family:var(--font-body);font-size:12px;line-height:1.2;overflow-x:auto;white-space:pre}
+.prompt-line{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ps1{color:var(--ok)}
+#cmd{
+  flex:1;min-width:8ch;background:transparent;border:0;outline:0;color:var(--hot);
+  font:inherit;caret-color:var(--hot);text-shadow:inherit;padding:0;
+}
+.cursor{display:inline-block;width:.6em;background:var(--amber);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.bar-fill{display:inline-block}
+.chips{width:100%;max-width:880px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chips button{
+  font:inherit;font-size:13px;color:var(--amber);background:#0c1a3a;border:1px solid var(--frame);
+  border-radius:6px;padding:6px 12px;cursor:pointer;
+}
+.chips button:hover{background:#16295a;color:var(--hot)}
+.chips button:focus-visible,#cmd:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:5}
+.skip{font-size:12px;color:var(--amber-dim);background:none;border:0;cursor:pointer;font:inherit;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.skip:hover{color:var(--hot)}
+@media (max-width:520px){ body{font-size:13px} .screen{min-height:70vh} #out{padding:14px} }
+@media (prefers-reduced-motion:reduce){ .cursor{animation:none} }
+</style>
+
+<div class="monitor">
+  <div class="bar"><span class="led"></span><span>papa-os · tty1</span><span class="sp"></span><button class="skip" id="skip" type="button">пропустить загрузку ›</button></div>
+  <div class="screen" id="screen"><div id="out" aria-live="polite"></div></div>
+</div>
+<div class="chips" id="chips" aria-label="Быстрые команды"></div>
+<canvas id="fx"></canvas>
+
+<script>
+const out = document.getElementById('out');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let skipping = reduce;
+const wait = ms => skipping ? Promise.resolve() : new Promise(r => setTimeout(r, ms));
+
+function line(html = '', cls = '') {
+  const d = document.createElement('div');
+  if (cls) d.className = cls;
+  d.innerHTML = html;
+  out.appendChild(d);
+  out.scrollTop = out.scrollHeight;
+  return d;
+}
+async function type(html, cls = '', speed = 18) {
+  if (skipping) return line(html, cls);
+  const d = line('', cls);
+  // type plain text, then swap in the final HTML
+  const tmp = document.createElement('div'); tmp.innerHTML = html;
+  const text = tmp.textContent;
+  for (let i = 1; i <= text.length; i++) {
+    d.textContent = text.slice(0, i);
+    out.scrollTop = out.scrollHeight;
+    if (skipping) break;
+    await wait(speed);
+  }
+  d.innerHTML = html;
+  return d;
+}
+async function progress(label, ms = 900) {
+  const d = line();
+  const W = 24;
+  for (let i = 0; i <= W; i++) {
+    d.innerHTML = `${label} <span class="dim">[</span>${'█'.repeat(i)}${'░'.repeat(W - i)}<span class="dim">]</span> ${Math.round(i / W * 100)}%`;
+    out.scrollTop = out.scrollHeight;
+    if (skipping) { i = W - 1; }
+    await wait(ms / W);
+  }
+}
+
+const today = new Date();
+const fmt = today.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+async function boot() {
+  out.innerHTML = '';
+  await type('PAPA-BIOS v∞.0  (c) с самого твоего рождения', 'dim', 10);
+  await wait(200);
+  line('Проверка памяти: <span class="hot">все детские воспоминания</span> ... <span class="ok">OK</span>');
+  await wait(250);
+  line('Чувство юмора: <span class="hot">безлимит</span> ... <span class="ok">OK</span>');
+  await wait(200);
+  line('Умение готовить: <span class="hot">нереальное</span> ... <span class="ok">OK</span>');
+  await wait(300);
+  line('');
+  await progress('Загрузка модулей заботы    ', 700);
+  await progress('Компиляция благодарности   ', 900);
+  line('');
+  await type(`[ <span class="ok">OK</span> ] Обнаружено событие: <span class="hot">День отца · ${fmt}</span>`, '', 14);
+  await wait(400);
+  await greet();
+  document.getElementById('skip').hidden = true;
+  skipping = false;
+  line('');
+  line('<span class="dim">Это интерактивная консоль. Напиши <span class="hot">help</span> или нажми кнопку ниже.</span>');
+  promptLine();
+  fireworks(2500);
+}
+
+async function greet() {
+  line('');
+  line('<span class="big">С Днём отца, папа!</span>');
+  line('<span class="sub">// самому родному и любимому</span>');
+  await wait(300);
+  line(`<span class="letter">Папа, поздравляю тебя с Днём отца!
+Спасибо тебе за всё, что ты для меня сделал и делаешь каждый день. За твою поддержку, за советы, за то, что ты всегда рядом, когда нужно, и за то, что веришь в меня. Я такой во многом благодаря тебе и, конечно, мамочке. Спасибо тебе за всё, чему ты меня научил.
+Я правда горжусь, что у меня такой папа.
+Желаю тебе крепкого здоровья, сил, спокойствия и как можно больше радостных дней. Пусть всё задуманное получается, а дома всегда будет тепло и уютно.
+Люблю тебя.
+
+<span class="hot">— твой сын, Егор</span></span>`);
+}
+
+/* ------------- interactive shell ------------- */
+let input;
+const history = []; let hIdx = 0;
+function promptLine() {
+  const d = line('', 'prompt-line');
+  d.innerHTML = '<span class="ps1">son@papa-os:~$</span>';
+  input = document.createElement('input');
+  input.id = 'cmd'; input.autocomplete = 'off'; input.spellcheck = false;
+  input.setAttribute('aria-label', 'Команда');
+  d.appendChild(input);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { const v = input.value; freeze(d, v); run(v); }
+    if (e.key === 'ArrowUp' && history.length) { hIdx = Math.max(0, hIdx - 1); input.value = history[hIdx]; e.preventDefault(); }
+    if (e.key === 'ArrowDown' && history.length) { hIdx = Math.min(history.length, hIdx + 1); input.value = history[hIdx] || ''; }
+  });
+  if (matchMedia('(pointer:fine)').matches) input.focus({ preventScroll: true });
+  out.scrollTop = out.scrollHeight;
+}
+function freeze(d, v) {
+  d.innerHTML = `<span class="ps1">son@papa-os:~$</span> <span class="hot"></span>`;
+  d.lastChild.textContent = v;
+}
+const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+
+const cmds = {
+  help: () => `Доступные команды:
+  <span class="hot">whoami</span>       кто ты такой
+  <span class="hot">neofetch</span>     характеристики системы
+  <span class="hot">спасибо</span>      список благодарностей
+  <span class="hot">обнять</span>       обнять папу
+  <span class="hot">салют</span>        праздничный фейерверк
+  <span class="hot">торт</span>         испечь торт
+  <span class="hot">sudo кофе</span>    сварить кофе с правами root
+  <span class="hot">uptime</span>       сколько ты уже лучший
+  <span class="hot">reboot</span>       посмотреть поздравление ещё раз
+  <span class="hot">clear</span>        очистить экран`,
+  whoami: () => `<span class="hot">папа</span>
+роль: root этой семьи
+доступ: ко всем сердцам без пароля`,
+  neofetch: () => `<pre class="art"><span class="hot">   .--.    </span>  <span class="hot">papa</span>@<span class="hot">family</span>
+<span class="hot">  |o_o |   </span>  ------------------
+<span class="hot">  |:_/ |   </span>  <span class="ok">OS:</span> Папа OS v∞ (LTS, поддержка пожизненно)
+<span class="hot"> //   \\ \\  </span>  <span class="ok">Kernel:</span> доброта-6.18-stable
+<span class="hot">(|     | ) </span>  <span class="ok">Uptime:</span> всю мою жизнь
+<span class="hot">/'\\_   _/\`\\</span>  <span class="ok">Shell:</span> спокойный голос
+<span class="hot">\\___)=(___/</span>  <span class="ok">CPU:</span> Мудрость Pro Max (∞ ядер)
+             <span class="ok">Memory:</span> хранит все наши тёплые моменты
+             <span class="ok">GPU:</span> видит меня насквозь
+             <span class="ok">Packages:</span> терпение, юмор, золотые руки
+             <span class="ok">Bugs:</span> 0 found</pre>`,
+  'спасибо': () => `Спасибо, пап, за:
+ <span class="ok">✓</span> то, что ты всегда рядом
+ <span class="ok">✓</span> твои мудрые советы
+ <span class="ok">✓</span> то, что веришь в меня, даже когда я сам сомневаюсь
+ <span class="ok">✓</span> твои золотые руки
+ <span class="ok">✓</span> твои шутки (да, они правда смешные)
+ <span class="ok">✓</span> пример того, каким должен быть настоящий мужчина`,
+  'обнять': () => `<pre class="art"><span class="hot">   (っ◔◡◔)っ  ♥  ⊂(◕‿◕⊂)</span>
+
+Крепко обнимаю тебя, пап... <span class="ok">доставлено ✓✓</span></pre>`,
+  'салют': () => { fireworks(4000); return 'Запуск салюта... <span class="ok">🎆 ура!</span>'; },
+  'торт': () => `<pre class="art"><span class="hot">        i i i i i
+       |:H:a:p:p:y:|
+     __|___________|__
+    |^^^^^^^^^^^^^^^^^|
+    |  С ДНЁМ  ОТЦА!  |
+    |_________________|</span></pre>
+<span class="dim">Торт собран без ошибок. Задуй свечи командой <span class="hot">салют</span>.</span>`,
+  'sudo кофе': () => `[sudo] пароль для son: ********
+Варим кофе для папы... <span class="ok">готово ☕</span>
+<span class="dim">Приятного утра, пап.</span>`,
+  uptime: () => {
+    return `up <span class="hot">∞ days</span>, лучший отец: <span class="ok">всегда</span>, load average: 0.00 (с ним всё легко)`;
+  },
+  reboot: async () => { await boot(); return null; },
+  clear: () => { out.innerHTML = ''; return ''; },
+  exit: () => 'Ошибка: из семьи выйти нельзя. Процесс защищён любовью.',
+  ls: () => '<span class="hot">воспоминания/  гордость.txt  планы_на_рыбалку.md  поздравление.exe</span>',
+  'cat гордость.txt': () => 'Я горжусь тобой, пап. И хочу, чтобы ты гордился мной.',
+  'rm -rf /': () => '<span class="hot">Отказано.</span> Папа такое не одобрит.',
+};
+const aliases = { thanks: 'спасибо', hug: 'обнять', fireworks: 'салют', cake: 'торт', 'sudo coffee': 'sudo кофе', 'sudo make coffee': 'sudo кофе', 'помощь': 'help' };
+
+async function run(raw) {
+  const v = raw.trim();
+  if (v) { history.push(v); hIdx = history.length; }
+  let key = v.toLowerCase().replace(/\s+/g, ' ');
+  key = aliases[key] || key;
+  if (!v) { promptLine(); return; }
+  const fn = cmds[key];
+  if (!fn) {
+    line(`${esc(v)}: команда не найдена. Но папа всё равно тебя любит. Попробуй <span class="hot">help</span>`, 'dim');
+  } else {
+    const r = await fn();
+    if (r === null) return;
+    if (r) line(r);
+  }
+  promptLine();
+}
+
+/* chips for phones and quick clicks */
+const chipList = ['help', 'neofetch', 'спасибо', 'обнять', 'салют', 'торт', 'sudo кофе', 'reboot'];
+const chips = document.getElementById('chips');
+chipList.forEach(c => {
+  const b = document.createElement('button'); b.type = 'button'; b.textContent = c;
+  b.addEventListener('click', () => {
+    if (!input || !input.isConnected) return;
+    const d = input.parentElement; freeze(d, c); run(c);
+  });
+  chips.appendChild(b);
+});
+document.getElementById('screen').addEventListener('click', () => { if (input && input.isConnected && getSelection().isCollapsed) input.focus({ preventScroll: true }); });
+document.getElementById('skip').addEventListener('click', () => { skipping = true; });
+
+/* ------------- fireworks made of glyphs ------------- */
+const cv = document.getElementById('fx'), cx = cv.getContext('2d');
+let parts = [], fxUntil = 0, raf = 0;
+function size() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+addEventListener('resize', size); size();
+const glyphs = ['♥', '1', '0', '★', '{', '}', '✦', '<3'];
+const colors = ['#6fb6ff', '#e4f1ff', '#7fe3c8', '#3d8bff', '#b9d9ff'];
+function burst() {
+  const x = (0.15 + Math.random() * 0.7) * cv.width, y = (0.15 + Math.random() * 0.4) * cv.height;
+  const c = colors[Math.random() * colors.length | 0];
+  for (let i = 0; i < 38; i++) {
+    const a = Math.PI * 2 * i / 38, s = (2 + Math.random() * 3) * devicePixelRatio;
+    parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 1, c, g: glyphs[Math.random() * glyphs.length | 0] });
+  }
+}
+function fireworks(ms) {
+  if (reduce) return;
+  fxUntil = performance.now() + ms;
+  if (!raf) tick();
+}
+let lastBurst = 0;
+function tick(t = performance.now()) {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  if (t < fxUntil && t - lastBurst > 350) { burst(); lastBurst = t; }
+  cx.font = `${14 * devicePixelRatio}px JetBrains Mono, monospace`;
+  parts = parts.filter(p => p.life > 0);
+  for (const p of parts) {
+    p.x += p.vx; p.y += p.vy; p.vy += 0.05 * devicePixelRatio; p.vx *= 0.98; p.life -= 0.012;
+    cx.globalAlpha = Math.max(p.life, 0); cx.fillStyle = p.c; cx.shadowColor = p.c; cx.shadowBlur = 8;
+    cx.fillText(p.g, p.x, p.y);
+  }
+  cx.globalAlpha = 1;
+  if (parts.length || t < fxUntil) raf = requestAnimationFrame(tick);
+  else { raf = 0; cx.clearRect(0, 0, cv.width, cv.height); }
+}
+
+boot();
+</script>
+
+</body>
+</html>
